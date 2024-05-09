@@ -462,12 +462,13 @@ public class RichTextDemo extends Application {
             Stage GPTPopupStage = new Stage();
             GPTPopupStage.initOwner(mainStage);
             GPTPopupStage.initModality(Modality.APPLICATION_MODAL);
-            Text GPTResultText = new Text("GPT result:");
-            GPTResultText.setStyle("-fx-font-size: 16px");
+            Text GPTResultText = new Text("YandexGPT result");
+            GPTResultText.getStyleClass().add("simple-text");
             GPTResultText.setFill(Color.BLACK);
             TextArea GPTArea = new TextArea();
+            GPTArea.setWrapText(true);
             GPTArea.setText(textGPT);
-            GPTArea.setStyle("-fx-font-size: 16px");
+            GPTArea.getStyleClass().add("white-box");
             GPTArea.setMaxWidth(300);
             GPTArea.setMaxHeight(200);
             GPTArea.setPrefHeight(200);
@@ -478,11 +479,13 @@ public class RichTextDemo extends Application {
             vBox.setMaxWidth(300);
             Button pasteButton = new Button();
             pasteButton.setText("Paste result");
+            pasteButton.getStyleClass().add("dark-button");
             pasteButton.setOnAction(event -> {
                 area.replaceSelection(GPTArea.getText());
                 GPTPopupStage.close();
             });
-            vBox.getStyleClass().add("white-box");
+            vBox.setStyle("-fx-background-color: white; -fx-padding: 10");
+            vBox.setAlignment(Pos.CENTER);
             vBox.getChildren().addAll(GPTResultText, GPTArea, pasteButton);
 
             int stageHeight = 250;

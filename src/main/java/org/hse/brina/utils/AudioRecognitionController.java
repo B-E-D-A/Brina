@@ -36,6 +36,7 @@ public class AudioRecognitionController {
         VBox.setVgrow(resultArea, Priority.ALWAYS);
         VBox.setVgrow(textVBox, Priority.ALWAYS);
         path = new StringBuilder();
+        resultArea.setWrapText(true);
     }
 
     public void loadAudio(ActionEvent actionEvent) {
