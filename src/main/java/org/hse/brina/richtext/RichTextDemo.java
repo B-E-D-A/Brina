@@ -39,6 +39,7 @@ import org.fxmisc.richtext.TextExt;
 import org.fxmisc.richtext.model.*;
 import org.hse.brina.Config;
 import org.hse.brina.Main;
+import org.hse.brina.utils.AudioRecognitionController;
 import org.python.antlr.ast.Str;
 import org.reactfx.SuspendableNo;
 import org.reactfx.util.Either;
@@ -361,7 +362,10 @@ public class RichTextDemo extends Application {
             Stage popupVoiceStage = new Stage();
             popupVoiceStage.initOwner(primaryStage);
             popupVoiceStage.initModality(Modality.APPLICATION_MODAL);
+            AudioRecognitionController controller = new AudioRecognitionController();
+            controller.documentArea = area;
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/org/hse/brina/views/audio-recognition-view.fxml"));
+            loader.setControllerFactory(param -> controller);
             Parent root = null;
             try {
                 root = loader.load();
@@ -967,7 +971,7 @@ public class RichTextDemo extends Application {
         }
     }
 
-    static class FoldableStyledArea extends GenericStyledArea<ParStyle, Either<String, LinkedImage>, TextStyle> {
+    public static class FoldableStyledArea extends GenericStyledArea<ParStyle, Either<String, LinkedImage>, TextStyle> {
         public final static TextOps<String, TextStyle> styledTextOps = SegmentOps.styledTextOps();
         public final static LinkedImageOps<TextStyle> linkedImageOps = new LinkedImageOps<>();
 
