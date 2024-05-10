@@ -6,9 +6,10 @@
 ### Возможности пользователя:
 
 - Базовый набор функций редактора документов
+- Распознавать текст из аудио-записей mp3
 - Записывать текст голосом
 - Использовать чат gpt
-- Создавать папки с правами доступа для определенных людей
+- Давать права доступа(чтение/редактирование) для определенных людей
 - Сохранение документов в разных форматах (pdf, txt, docx)
 
 ### Инструкция по установке приложения
@@ -27,6 +28,16 @@ module not specified = `19`,
 Main Class = `org.hse.brina.Main`
 
 Modify options —> Add VM options: `--module-path "path\openjfx-17.0.10_windows-x64_bin-sdk\javafx-sdk-17.0.10\lib" --add-modules javafx.controls,javafx.fxml` , где в кавычках надо указать путь к папке lib у скачанной библиотеки javafx
+
+- в папке проекта Brina создайте файл `.env`, скопируйте туда содержимое `.env.example` и допишите недостающую информацию:
+  - ID проекта Google Cloud `regal-crowbar-421701`
+  - ID приватного ключа (для Google Cloud)
+  - Приватный ключ (для Google Cloud)
+  - Электронная почта клиента `brina-373@regal-crowbar-421701.iam.gserviceaccount.com`
+  - ID клиента `108426607798802531281`
+  - URL для сертификата клиента `https://www.googleapis.com/robot/v1/metadata/x509/brina-373%40regal-crowbar-421701.iam.gserviceaccount.com`
+  - API key для чата YandexGPT
+
 
 - запускаем `Server.java`, далее `Main.java` (Main, который настоили)
 
