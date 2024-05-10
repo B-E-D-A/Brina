@@ -40,11 +40,10 @@ import org.fxmisc.richtext.model.*;
 import org.hse.brina.Config;
 import org.hse.brina.Main;
 import org.hse.brina.utils.AudioRecognitionController;
-import org.python.antlr.ast.Str;
+import org.hse.brina.yandexGPT.server.GPTServer;
 import org.reactfx.SuspendableNo;
 import org.reactfx.util.Either;
 import org.reactfx.util.Tuple2;
-import org.hse.brina.yandexGPT.server.GPTServer;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -71,7 +70,7 @@ public class RichTextDemo extends Application {
     public final SuspendableNo updatingToolbar = new SuspendableNo();
     public String previousView = "/org/hse/brina/views/main-window-view.fxml";
     public Stage mainStage;
-    private StringBuilder documentId = new StringBuilder();
+    private final StringBuilder documentId = new StringBuilder();
     private TextField documentNameField = new TextField();
     private Scene mainScene;
 
@@ -100,7 +99,7 @@ public class RichTextDemo extends Application {
             logger.info(documentNameField.getText());
             Config.client.sendMessage("unlockDocument " + documentNameField.getText());
             FXMLLoader loader = new FXMLLoader(Main.class.getResource(previousView));
-            Parent pageLoader = null;
+            Parent pageLoader;
             try {
                 pageLoader = loader.load();
             } catch (IOException ex) {
@@ -361,12 +360,12 @@ public class RichTextDemo extends Application {
         recordingButton.setOnAction(e -> {
             Stage popupVoiceStage = new Stage();
             popupVoiceStage.initOwner(primaryStage);
-            popupVoiceStage.initModality(Modality.APPLICATION_MODAL);
+            popupVoiceStage.initModality(Modality.NONE);
             AudioRecognitionController controller = new AudioRecognitionController();
             controller.documentArea = area;
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/org/hse/brina/views/audio-recognition-view.fxml"));
             loader.setControllerFactory(param -> controller);
-            Parent root = null;
+            Parent root;
             try {
                 root = loader.load();
             } catch (IOException ex) {
@@ -403,9 +402,35 @@ public class RichTextDemo extends Application {
             contextMenu.show(area, e.getScreenX(), e.getScreenY());
         });
 
+        Button chatGPTButton = new Button();
+        chatGPTButton.getStyleClass().add("yandex-gpt");
+        chatGPTButton.setPrefWidth(30);
+        chatGPTButton.setPrefHeight(30);
+        chatGPTButton.setOnAction(e -> {
+            Stage popupChatStage = new Stage();
+            popupChatStage.initOwner(primaryStage);
+            popupChatStage.initModality(Modality.NONE);
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/org/hse/brina/views/yandex-gpt-view.fxml"));
+            Parent root;
+            try {
+                root = loader.load();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            Scene scene = new Scene(root, mainStage.getScene().getWidth(), mainStage.getScene().getHeight());
+            popupChatStage.setScene(scene);
+            try (InputStream iconStream = getClass().getResourceAsStream("/org/hse/brina/assets/small-icon.png")) {
+                Image icon = new Image(iconStream);
+                popupChatStage.getIcons().add(icon);
+            } catch (Exception error) {
+                logger.error(error.getMessage());
+            }
+            popupChatStage.showAndWait();
+        });
+
         featuresHBox.setStyle("-fx-background-color: white; -fx-alignment: TOP_RIGHT; -fx-spacing: 1;");
         featuresHBox.setAlignment(Pos.TOP_RIGHT);
-        featuresHBox.getChildren().addAll(recordingButton);
+        featuresHBox.getChildren().addAll(recordingButton, chatGPTButton);
         featuresHBox.setPrefHeight(30);
         featuresHBox.setPrefWidth(280);
         featuresHBox.setMinWidth(70);
@@ -461,18 +486,18 @@ public class RichTextDemo extends Application {
             String textGPT = GPTServer.getGPTProcessing(option, text);
             Stage GPTPopupStage = new Stage();
             GPTPopupStage.initOwner(mainStage);
-            GPTPopupStage.initModality(Modality.APPLICATION_MODAL);
+            GPTPopupStage.initModality(Modality.NONE);
             Text GPTResultText = new Text("YandexGPT result");
             GPTResultText.getStyleClass().add("simple-text");
             GPTResultText.setFill(Color.BLACK);
             TextArea GPTArea = new TextArea();
             GPTArea.setWrapText(true);
             GPTArea.setText(textGPT);
-            GPTArea.getStyleClass().add("white-box");
-            GPTArea.setMaxWidth(300);
-            GPTArea.setMaxHeight(200);
-            GPTArea.setPrefHeight(200);
-            GPTArea.setPrefWidth(300);
+            GPTArea.setStyle("-fx-background-color: white; -fx-border-color: #101d2f; -fx-border-width: 1px; -fx-border-radius: 8px");
+            GPTArea.setMaxWidth(440);
+            GPTArea.setMaxHeight(290);
+            GPTArea.setPrefHeight(290);
+            GPTArea.setPrefWidth(440);
             VBox vBox = new VBox();
             vBox.setAlignment(Pos.CENTER);
             vBox.setSpacing(10);
@@ -488,8 +513,8 @@ public class RichTextDemo extends Application {
             vBox.setAlignment(Pos.CENTER);
             vBox.getChildren().addAll(GPTResultText, GPTArea, pasteButton);
 
-            int stageHeight = 250;
-            int stageWidth = 310;
+            int stageHeight = 300;
+            int stageWidth = 450;
             Scene popupScene = new Scene(vBox, stageWidth, stageHeight);
             popupScene.getStylesheets().add("/org/hse/brina/css/sign-in-page-style.css");
             GPTPopupStage.setScene(popupScene);

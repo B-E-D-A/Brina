@@ -108,3 +108,7 @@
 .microphone{
     -fx-background-image: url(mic.png);
 }
+
+.yandex-gpt{
+    -fx-background-image: url(yandex-gpt.png);
+}
