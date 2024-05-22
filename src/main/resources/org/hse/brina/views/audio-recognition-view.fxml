@@ -8,12 +8,13 @@
       stylesheets="@../css/sign-in-page-style.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
       fx:controller="org.hse.brina.utils.AudioRecognitionController">
     <VBox fx:id="textVBox" alignment="CENTER" spacing="10" style="-fx-background-color: white; -fx-padding: 10">
-        <HBox alignment="CENTER" maxHeight="50" spacing="10" styleClass="white-box">
-            <Text styleClass="simple-text" text="Audio file:"/>
+        <HBox fx:id="audioHBox" alignment="CENTER" maxHeight="50" spacing="10" styleClass="white-box">
+            <Text styleClass="simple-text" text="Audio:"/>
             <Text fx:id="audioName" styleClass="simple-text"/>
         </HBox>
         <HBox alignment="CENTER" maxHeight="50" spacing="10" styleClass="white-box">
             <Button fx:id="loadAudio" onAction="#loadAudio" styleClass="access-button" text="Load"/>
+            <Button fx:id="recordAudioButton" onAction="#recordAudio" styleClass="access-button" text="Record"/>
             <Button fx:id="speechRecognitionButton" onAction="#recognizeSpeech" styleClass="dark-button"
                     text="Recognize Speech"/>
         </HBox>

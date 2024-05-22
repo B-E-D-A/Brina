@@ -1,4 +1,4 @@
-package org.hse.brina.signing;
+package org.hse.brina.signin;
 
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hse.brina.Config;
 import org.hse.brina.Main;
 
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class SuccessfulSignUpController {
     private void enter() {
         Stage stage = (Stage) label.getScene().getWindow();
         try {
-            loadScene(stage, "/org/hse/brina/views/main-window-view.fxml");
+            loadScene(stage, Config.getPathToViews()+"main-window-view.fxml");
         } catch (IOException e) {
             logger.error("Scene configuration file not found. " + e.getMessage());
         }

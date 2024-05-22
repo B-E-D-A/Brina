@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.VBox?>
 <VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER"
       xmlns="http://javafx.com/javafx"
-      fx:controller="org.hse.brina.signing.SuccessfulSignUpController"
+      fx:controller="org.hse.brina.signin.SuccessfulSignUpController"
       stylesheets="@../css/successful-page-style.css" style="-fx-background-color: white">
     <Label fx:id="label" text="Start writing your story today!" textAlignment="CENTER" alignment="CENTER"
            styleClass="success-text"/>

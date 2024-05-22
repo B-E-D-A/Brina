@@ -8,7 +8,7 @@
 <?import javafx.scene.text.*?>
 <Pane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400" prefWidth="600" styleClass="white-box"
       stylesheets="@../css/sign-in-page-style.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
-      fx:controller="org.hse.brina.signing.SignUpController">
+      fx:controller="org.hse.brina.signin.SignUpController">
     <HBox alignment="CENTER" prefHeight="400" prefWidth="600" styleClass="white-box">
         <padding>
             <Insets top="50.0"/>

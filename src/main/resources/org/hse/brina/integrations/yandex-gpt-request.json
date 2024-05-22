@@ -1,0 +1,18 @@
+{
+  "modelUri": "gpt://b1ga2cesmk39eimceq67/yandexgpt-lite",
+  "completionOptions": {
+    "stream": false,
+    "temperature": 0.6,
+    "maxTokens": "10000"
+  },
+  "messages": [
+    {
+      "role": "system",
+      "text": "[QUERY]"
+    },
+    {
+      "role": "user",
+      "text": "[TEXT]"
+    }
+  ]
+}

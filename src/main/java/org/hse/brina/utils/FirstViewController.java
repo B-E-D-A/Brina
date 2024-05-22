@@ -52,7 +52,7 @@ public class FirstViewController implements Initializable {
     private void openWelcomeWindow() {
         Stage stage = (Stage) text.getScene().getWindow();
         try {
-            loadScene(stage, "/org/hse/brina/views/sign-in-view.fxml");
+            loadScene(stage, Config.getPathToViews()+"sign-in-view.fxml");
         } catch (IOException e) {
             logger.error("Scene configuration file not found. " + e.getMessage());
         }

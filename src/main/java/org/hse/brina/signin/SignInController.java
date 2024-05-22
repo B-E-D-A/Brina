@@ -1,6 +1,5 @@
-package org.hse.brina.signing;
+package org.hse.brina.signin;
 
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +16,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hse.brina.Config;
 import org.hse.brina.Main;
-import org.hse.brina.client.Client;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -54,15 +52,34 @@ public class SignInController {
     private TextField openedPasswordField;
     @FXML
     private ImageView eyeImage;
+    @FXML
     private Image eyeOpenImage;
+    @FXML
     private Image eyeClosedImage;
     private boolean passwordVisible = false;
+
+    protected static String getHash(String input) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(input.getBytes(StandardCharsets.UTF_8));
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            logger.info("Unable to hash password");
+            return null;
+        }
+    }
 
     @FXML
     protected void initialize() {
 
-        eyeOpenImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/org/hse/brina/assets/open-eye.png")));
-        eyeClosedImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/org/hse/brina/assets/closed-eye.png")));
+        eyeOpenImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(Config.getPathToAssets() + "open-eye.png")));
+        eyeClosedImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(Config.getPathToAssets() + "closed-eye.png")));
 
         setEyeButtonAction();
 
@@ -78,7 +95,6 @@ public class SignInController {
         stage.setScene(scene);
     }
 
-    @FXML
     protected boolean checkIfFieldsAreEmpty() {
         boolean isValid = true;
         eyeButton.setOnAction(Event::consume);
@@ -125,17 +141,17 @@ public class SignInController {
     private void signUpFromInButtonClicked() {
         Stage stage = (Stage) signUpButton.getScene().getWindow();
         try {
-            loadScene(stage, "/org/hse/brina/views/sign-up-view.fxml");
+            loadScene(stage, Config.getPathToViews() + "sign-up-view.fxml");
         } catch (IOException e) {
-            System.err.println("Scene configuration file not found. " + e.getMessage());
+            logger.error("Scene configuration file not found. " + e.getMessage());
         }
     }
 
     private void enter(Stage stage) {
         try {
-            loadScene(stage, "/org/hse/brina/views/main-window-view.fxml");
+            loadScene(stage, Config.getPathToViews() + "main-window-view.fxml");
         } catch (IOException e) {
-            System.err.println("Scene configuration file not found. " + e.getMessage());
+            logger.error("Scene configuration file not found. " + e.getMessage());
         }
         stage.setResizable(true);
     }
@@ -155,23 +171,6 @@ public class SignInController {
         openedPasswordField.setVisible(false);
         eyeImage.setImage(eyeClosed);
         passwordVisible = !passwordVisible;
-    }
-
-    private static String getHash(String input) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(input.getBytes(StandardCharsets.UTF_8));
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : hash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) hexString.append('0');
-                hexString.append(hex);
-            }
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            logger.info("Unable to hash password");
-            return null;
-        }
     }
 
     protected void setEyeButtonAction() {

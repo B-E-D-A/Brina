@@ -38,7 +38,7 @@ public class Connector {
             statement.executeUpdate(sql);
             logger.info("Tables has been created");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (connector != null) {

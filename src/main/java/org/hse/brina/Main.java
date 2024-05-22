@@ -28,7 +28,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        File documents = new File(Config.getProjectPath().substring(0, Config.getProjectPath().length() - 19) + "documents");
+        File documents = new File(Config.getProjectPath().substring(0, Config.getProjectPath().length() - Config.getAppNameLength()) + "documents");
         if (!documents.exists()) {
             try {
                 documents.mkdirs();

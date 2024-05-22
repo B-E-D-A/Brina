@@ -18,6 +18,7 @@ import org.hse.brina.speech.recognition.SpeechRecognition;
 import java.io.File;
 
 public class AudioRecognitionController {
+    private static final Logger logger = LogManager.getLogger();
     public Button loadAudio;
     public Button speechRecognitionButton;
     public TextArea resultArea;
@@ -25,18 +26,20 @@ public class AudioRecognitionController {
     public HBox pasteHBox;
     public VBox textVBox;
     public Text audioName;
-    private StringBuilder path;
+    public Button recordAudioButton;
+    public HBox audioHBox;
     public RichTextDemo.FoldableStyledArea documentArea;
-    private static final Logger logger = LogManager.getLogger();
+    private StringBuilder path;
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         HBox.setHgrow(pasteHBox, Priority.ALWAYS);
         HBox.setHgrow(resultArea, Priority.ALWAYS);
         VBox.setVgrow(resultArea, Priority.ALWAYS);
         VBox.setVgrow(textVBox, Priority.ALWAYS);
         path = new StringBuilder();
         resultArea.setWrapText(true);
+        audioName.setVisible(false);
     }
 
     public void loadAudio(ActionEvent actionEvent) {
@@ -51,6 +54,7 @@ public class AudioRecognitionController {
         fileChooser.setSelectedExtensionFilter(fileChooser.getExtensionFilters().get(0));
         File selectedFile = fileChooser.showOpenDialog(resultArea.getScene().getWindow());
         if (selectedFile != null) {
+            audioName.setVisible(true);
             path.replace(0, path.length(), selectedFile.getAbsolutePath());
             audioName.setText(" " + selectedFile.getName());
         }
@@ -58,19 +62,23 @@ public class AudioRecognitionController {
 
     public void recognizeSpeech(ActionEvent actionEvent) throws Exception {
         SpeechRecognition recognizer = new SpeechRecognition();
-        if(!path.isEmpty()){
+        if (!path.isEmpty()) {
             String content = recognizer.translateAudioToText(path.toString());
             resultArea.setText(content);
         }
     }
 
     public void pasteResult(ActionEvent actionEvent) {
-        try{
+        try {
             documentArea.insertText(documentArea.getCaretPosition(), resultArea.getText());
             Stage stage = (Stage) speechRecognitionButton.getScene().getWindow();
             stage.close();
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.error("RichText document is not created so recognized text could not be pasted");
         }
     }
+
+    public void recordAudio(ActionEvent actionEvent) {
+    }
+
 }

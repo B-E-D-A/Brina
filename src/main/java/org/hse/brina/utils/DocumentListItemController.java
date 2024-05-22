@@ -33,11 +33,11 @@ public class DocumentListItemController implements Initializable {
         String response = Config.client.receiveMessage();
         if (response.equals("0")) {
             document.setStatus("unlocked");
-            Image lockedImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/org/hse/brina/assets/unlocked.png")));
+            Image lockedImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(Config.getPathToAssets()+"unlocked.png")));
             statusImage.setImage(lockedImage);
         } else {
             document.setStatus("locked");
-            Image lockedImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/org/hse/brina/assets/locked.png")));
+            Image lockedImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(Config.getPathToAssets()+"locked.png")));
             statusImage.setImage(lockedImage);
         }
         if (document.getAccess().equals("r")) {

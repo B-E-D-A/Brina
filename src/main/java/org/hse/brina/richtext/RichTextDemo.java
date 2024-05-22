@@ -68,7 +68,7 @@ public class RichTextDemo extends Application {
     private static final Logger logger = LogManager.getLogger();
     public final FoldableStyledArea area = new FoldableStyledArea();
     public final SuspendableNo updatingToolbar = new SuspendableNo();
-    public String previousView = "/org/hse/brina/views/main-window-view.fxml";
+    public String previousView = Config.getPathToViews()+"main-window-view.fxml";
     public Stage mainStage;
     private final StringBuilder documentId = new StringBuilder();
     private TextField documentNameField = new TextField();
@@ -363,7 +363,7 @@ public class RichTextDemo extends Application {
             popupVoiceStage.initModality(Modality.NONE);
             AudioRecognitionController controller = new AudioRecognitionController();
             controller.documentArea = area;
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/org/hse/brina/views/audio-recognition-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource(Config.getPathToViews()+"audio-recognition-view.fxml"));
             loader.setControllerFactory(param -> controller);
             Parent root;
             try {
@@ -373,7 +373,7 @@ public class RichTextDemo extends Application {
             }
             Scene scene = new Scene(root, mainStage.getScene().getWidth(), mainStage.getScene().getHeight());
             popupVoiceStage.setScene(scene);
-            try (InputStream iconStream = getClass().getResourceAsStream("/org/hse/brina/assets/small-icon.png")) {
+            try (InputStream iconStream = getClass().getResourceAsStream(Config.getPathToAssets()+"small-icon.png")) {
                 Image icon = new Image(iconStream);
                 popupVoiceStage.getIcons().add(icon);
             } catch (Exception error) {
@@ -410,7 +410,7 @@ public class RichTextDemo extends Application {
             Stage popupChatStage = new Stage();
             popupChatStage.initOwner(primaryStage);
             popupChatStage.initModality(Modality.NONE);
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/org/hse/brina/views/yandex-gpt-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource(Config.getPathToViews()+"yandex-gpt-view.fxml"));
             Parent root;
             try {
                 root = loader.load();
@@ -419,7 +419,7 @@ public class RichTextDemo extends Application {
             }
             Scene scene = new Scene(root, mainStage.getScene().getWidth(), mainStage.getScene().getHeight());
             popupChatStage.setScene(scene);
-            try (InputStream iconStream = getClass().getResourceAsStream("/org/hse/brina/assets/small-icon.png")) {
+            try (InputStream iconStream = getClass().getResourceAsStream(Config.getPathToAssets()+"small-icon.png")) {
                 Image icon = new Image(iconStream);
                 popupChatStage.getIcons().add(icon);
             } catch (Exception error) {
@@ -516,7 +516,7 @@ public class RichTextDemo extends Application {
             int stageHeight = 300;
             int stageWidth = 450;
             Scene popupScene = new Scene(vBox, stageWidth, stageHeight);
-            popupScene.getStylesheets().add("/org/hse/brina/css/sign-in-page-style.css");
+            popupScene.getStylesheets().add(Config.getPathToCss()+"sign-in-page-style.css");
             GPTPopupStage.setScene(popupScene);
             if (mainScene != null) {
                 Window previousWindow = mainScene.getWindow();
@@ -525,7 +525,7 @@ public class RichTextDemo extends Application {
                 GPTPopupStage.setX(centerX);
                 GPTPopupStage.setY(centerY);
             }
-            try (InputStream iconStream = getClass().getResourceAsStream("/org/hse/brina/assets/small-icon.png")) {
+            try (InputStream iconStream = getClass().getResourceAsStream(Config.getPathToAssets()+"small-icon.png")) {
                 Image icon = new Image(iconStream);
                 GPTPopupStage.getIcons().add(icon);
             } catch (Exception exe) {
@@ -655,7 +655,7 @@ public class RichTextDemo extends Application {
                 int smallStageHeight = 85;
                 int smallStageWidth = 310;
                 Scene smallScene = new Scene(globalVBox, smallStageWidth, smallStageHeight);
-                smallScene.getStylesheets().add("/org/hse/brina/css/sign-in-page-style.css");
+                smallScene.getStylesheets().add(Config.getPathToCss()+"sign-in-page-style.css");
                 IDStage.setScene(smallScene);
                 if (mainScene != null) {
                     Window previousWindow = mainScene.getWindow();
@@ -664,7 +664,7 @@ public class RichTextDemo extends Application {
                     IDStage.setX(centerX);
                     IDStage.setY(centerY);
                 }
-                try (InputStream iconStream = getClass().getResourceAsStream("/org/hse/brina/assets/small-icon.png")) {
+                try (InputStream iconStream = getClass().getResourceAsStream(Config.getPathToAssets()+"small-icon.png")) {
                     Image icon = new Image(iconStream);
                     IDStage.getIcons().add(icon);
                 } catch (Exception e) {
@@ -682,7 +682,7 @@ public class RichTextDemo extends Application {
         int stageHeight = 250;
         int stageWidth = 310;
         Scene popupScene = new Scene(popupLayout, stageWidth, stageHeight);
-        popupScene.getStylesheets().add("/org/hse/brina/css/sign-in-page-style.css");
+        popupScene.getStylesheets().add(Config.getPathToCss()+"sign-in-page-style.css");
         popupStage.setScene(popupScene);
         if (mainScene != null) {
             Window previousWindow = mainScene.getWindow();
@@ -691,7 +691,7 @@ public class RichTextDemo extends Application {
             popupStage.setX(centerX);
             popupStage.setY(centerY);
         }
-        try (InputStream iconStream = getClass().getResourceAsStream("/org/hse/brina/assets/small-icon.png")) {
+        try (InputStream iconStream = getClass().getResourceAsStream(Config.getPathToAssets()+"small-icon.png")) {
             Image icon = new Image(iconStream);
             popupStage.getIcons().add(icon);
         } catch (Exception e) {
@@ -771,10 +771,9 @@ public class RichTextDemo extends Application {
     }
 
     public void loadDocument() {
-        String initialDir = System.getProperty("user.dir");
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Load document");
-        fileChooser.setInitialDirectory(new File(initialDir));
+        fileChooser.setInitialDirectory(new File(Config.getProjectPath()));
 
         setExtensions(fileChooser);
         fileChooser.setSelectedExtensionFilter(fileChooser.getExtensionFilters().get(0));
@@ -845,10 +844,9 @@ public class RichTextDemo extends Application {
     }
 
     public void saveDocument() {
-        String initialDir = System.getProperty("user.dir");
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save document");
-        fileChooser.setInitialDirectory(new File(initialDir));
+        fileChooser.setInitialDirectory(new File(Config.getProjectPath()));
         fileChooser.setInitialFileName(documentNameField.getText() + RTFX_FILE_EXTENSION);
 
         setExtensions(fileChooser);
@@ -915,10 +913,9 @@ public class RichTextDemo extends Application {
      * Action listener which inserts a new image at the current caret position.
      */
     public void insertImage() {
-        String initialDir = System.getProperty("user.dir");
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Insert image");
-        fileChooser.setInitialDirectory(new File(initialDir));
+        fileChooser.setInitialDirectory(new File(Config.getProjectPath()));
         File selectedFile = fileChooser.showOpenDialog(mainStage);
         if (selectedFile != null) {
             String imagePath = selectedFile.getAbsolutePath();

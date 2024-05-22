@@ -48,7 +48,7 @@ public class ProjectsController implements Initializable {
         HBox.setHgrow(gHBox, Priority.ALWAYS);
         List<Document> documents = new ArrayList<>(documents());
         for (Document document : documents) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/hse/brina/views/document-list-item-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(Config.getPathToViews()+"document-list-item-view.fxml"));
             try {
                 HBox documentHBox = loader.load();
                 DocumentListItemController controller = loader.getController();
@@ -62,7 +62,7 @@ public class ProjectsController implements Initializable {
                     String value = userDocumentsMap.get(controller.accessText.getText().charAt(0)+key);
                     if (!response.equals("Document closed") && key != null && value != null && !(Objects.equals(key, " ") || key.isEmpty()) && !(Objects.equals(value, " ") || value.isEmpty())) {
                         RichTextDemo richTextWindow = new RichTextDemo();
-                        richTextWindow.previousView = "/org/hse/brina/views/projects-view.fxml";
+                        richTextWindow.previousView = Config.getPathToViews()+"projects-view.fxml";
                         richTextWindow.start((Stage) documentList.getScene().getWindow());
                         File file = new File(value);
                         if (file.exists()) {
@@ -98,7 +98,7 @@ public class ProjectsController implements Initializable {
     public void backButtonClicked(ActionEvent actionEvent) {
         Stage stage = (Stage) backButton.getScene().getWindow();
         try {
-            loadScene(stage, "/org/hse/brina/views/main-window-view.fxml");
+            loadScene(stage, Config.getPathToViews()+"main-window-view.fxml");
         } catch (IOException e) {
             logger.error("Scene configuration file not found. " + e.getMessage());
         }

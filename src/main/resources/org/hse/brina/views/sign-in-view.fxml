@@ -12,7 +12,7 @@
       style="-fx-background-color: #101d2f"
       stylesheets="@../css/sign-in-page-style.css"
       xmlns="http://javafx.com/javafx/17.0.2-ea"
-      fx:controller="org.hse.brina.signing.SignInController">
+      fx:controller="org.hse.brina.signin.SignInController">
 
     <HBox alignment="CENTER_RIGHT" prefHeight="400" prefWidth="600">
         <VBox alignment="CENTER" prefHeight="600" prefWidth="200">

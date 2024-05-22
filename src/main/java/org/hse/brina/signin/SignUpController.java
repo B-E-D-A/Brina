@@ -1,4 +1,4 @@
-package org.hse.brina.signing;
+package org.hse.brina.signin;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hse.brina.Config;
-import org.hse.brina.client.Client;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -36,7 +35,7 @@ public class SignUpController extends SignInController {
     private void backButtonClicked() {
         Stage stage = (Stage) backButton.getScene().getWindow();
         try {
-            loadScene(stage, "/org/hse/brina/views/sign-in-view.fxml");
+            loadScene(stage, Config.getPathToViews()+"sign-in-view.fxml");
         } catch (IOException e) {
             logger.error("Scene configuration file not found. " + e.getMessage());
         }
@@ -74,28 +73,12 @@ public class SignUpController extends SignInController {
                     invalidLoginField.setText("User with this name already exists");
                     invalidLoginField.setVisible(true);
                 } else if (response.equals("User is registered")) {
-                    loadScene(stage, "/org/hse/brina/views/successful-sign-up-view.fxml");
+                    loadScene(stage, Config.getPathToViews()+"successful-sign-up-view.fxml");
                 }
             } catch (Exception e) {
                 logger.error("Scene configuration file not found. " + e.getMessage());
             }
             stage.setResizable(true);
-        }
-    }
-    private static String getHash(String input) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(input.getBytes(StandardCharsets.UTF_8));
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : hash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) hexString.append('0');
-                hexString.append(hex);
-            }
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            logger.info("Unable to hash password");
-            return null;
         }
     }
 }

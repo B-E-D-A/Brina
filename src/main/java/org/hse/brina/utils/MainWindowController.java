@@ -41,7 +41,7 @@ public class MainWindowController implements Initializable {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlView));
         Parent sceneLoader = loader.load();
         Scene scene;
-        if (!fxmlView.equals("/org/hse/brina/views/sign-in-view.fxml")) {
+        if (!fxmlView.equals(Config.getPathToViews()+"sign-in-view.fxml")) {
             scene = new Scene(sceneLoader, stage.getScene().getWidth(), stage.getScene().getHeight());
         } else {
             scene = new Scene(sceneLoader, Config.getDefaultWidth(), Config.getDefaultHeight());
@@ -53,7 +53,7 @@ public class MainWindowController implements Initializable {
     private void openCreateButton() {
         Stage stage = (Stage) create_new.getScene().getWindow();
         RichTextDemo richTextWindow = new RichTextDemo();
-        richTextWindow.previousView = "/org/hse/brina/views/main-window-view.fxml";
+        richTextWindow.previousView = Config.getPathToViews()+"main-window-view.fxml";
         richTextWindow.start(stage);
     }
 
@@ -61,7 +61,7 @@ public class MainWindowController implements Initializable {
     private void openCollabButton() {
         Stage stage = (Stage) collab.getScene().getWindow();
         try {
-            openButton(stage, "/org/hse/brina/views/collaboration-view.fxml");
+            openButton(stage, Config.getPathToViews()+"collaboration-view.fxml");
         } catch (IOException e) {
             logger.error("Scene configuration file not found. " + e.getMessage());
         }
@@ -71,7 +71,7 @@ public class MainWindowController implements Initializable {
     private void openMyProdButton() {
         Stage stage = (Stage) my.getScene().getWindow();
         try {
-            openButton(stage, "/org/hse/brina/views/projects-view.fxml");
+            openButton(stage, Config.getPathToViews()+"projects-view.fxml");
         } catch (IOException e) {
             logger.error("Scene configuration file not found. here" + e.getMessage());
         }
@@ -86,7 +86,7 @@ public class MainWindowController implements Initializable {
     public void logOut(ActionEvent actionEvent) {
         Stage stage = (Stage) logOutButton.getScene().getWindow();
         try {
-            openButton(stage, "/org/hse/brina/views/sign-in-view.fxml");
+            openButton(stage, Config.getPathToViews()+"sign-in-view.fxml");
         } catch (IOException e) {
             logger.error("Scene configuration file not found. " + e.getMessage());
         }

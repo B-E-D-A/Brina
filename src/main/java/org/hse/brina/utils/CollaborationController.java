@@ -82,7 +82,7 @@ public class CollaborationController {
                 popupStage.setX(centerX);
                 popupStage.setY(centerY);
             }
-            try (InputStream iconStream = getClass().getResourceAsStream("/org/hse/brina/assets/small-icon.png")) {
+            try (InputStream iconStream = getClass().getResourceAsStream(Config.getPathToAssets() + "small-icon.png")) {
                 Image icon = new Image(iconStream);
                 popupStage.getIcons().add(icon);
             } catch (Exception e) {
@@ -93,10 +93,9 @@ public class CollaborationController {
         } else {
             String[] responseData = response.split(" ");
             String filePath = responseData[0];
-//            String access = responseData[1];
             Config.client.sendMessage("lockDocument " + id);
             RichTextDemo richTextWindow = new RichTextDemo();
-            richTextWindow.previousView = "/org/hse/brina/views/collaboration-view.fxml";
+            richTextWindow.previousView = Config.getPathToViews() + "collaboration-view.fxml";
             richTextWindow.start((Stage) Enter.getScene().getWindow());
             File file = new File(filePath);
             if (file.exists()) richTextWindow.loadRTFX(file);
@@ -107,7 +106,7 @@ public class CollaborationController {
     public void backButtonClicked(ActionEvent actionEvent) {
         Stage stage = (Stage) backButton.getScene().getWindow();
         try {
-            loadScene(stage, "/org/hse/brina/views/main-window-view.fxml");
+            loadScene(stage, Config.getPathToViews()+"main-window-view.fxml");
         } catch (IOException e) {
             logger.error("Scene configuration file not found. " + e.getMessage());
         }

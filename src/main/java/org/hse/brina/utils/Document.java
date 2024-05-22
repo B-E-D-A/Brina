@@ -1,8 +1,10 @@
 package org.hse.brina.utils;
 
+import org.hse.brina.Config;
+
 public class Document {
     private final StringBuilder name;
-    private final StringBuilder image = new StringBuilder("/org/hse/brina/assets/unlocked.png");
+    private final StringBuilder image = new StringBuilder(Config.getPathToAssets()+"unlocked.png");
     private final String access;
     private STATUS status;
 
