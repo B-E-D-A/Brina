@@ -99,14 +99,14 @@ public class SignInController {
         boolean isValid = true;
         eyeButton.setOnAction(Event::consume);
         if (loginField.getText().isEmpty()) {
-            invalidLoginField.setText("Enter your login");
+            invalidLoginField.setText("Введите свой логин");
             invalidLoginField.setVisible(true);
             isValid = false;
         } else {
             invalidLoginField.setVisible(false);
         }
         if (passwordField.getText().isEmpty()) {
-            invalidPasswordField.setText("Enter your password");
+            invalidPasswordField.setText("Введите свой пароль");
             invalidPasswordField.setVisible(true);
             isValid = false;
         } else {
@@ -125,11 +125,11 @@ public class SignInController {
         Config.client.sendMessage("signInUser " + username + " " + getHash(password + password.hashCode()));
         String response = Config.client.receiveMessage();
         if (response.equals("User with this name not found")) {
-            invalidLoginField.setText("User with this name doesn't exist");
+            invalidLoginField.setText("Пользователя с таким именем не существует");
             invalidLoginField.setVisible(true);
             setEyeButtonAction();
         } else if (response.equals("Wrong password")) {
-            invalidPasswordField.setText("Wrong password");
+            invalidPasswordField.setText("Неверный пароль");
             invalidPasswordField.setVisible(true);
             setEyeButtonAction();
         } else if (isValid && response.equals("User logged in")) {

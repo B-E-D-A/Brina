@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,6 +38,14 @@ public class Main extends Application {
             }
         } else {
             logger.info("Documents already exists");
+        }
+
+        try {
+            Font.loadFont(getClass().getResourceAsStream("fonts/Montserrat-Regular.ttf"), 20);
+            Font.loadFont(getClass().getResourceAsStream("fonts/Montserrat-Bold.ttf"), 20);
+            Font.loadFont(getClass().getResourceAsStream("fonts/Montserrat-Light.ttf"), 20);
+        } catch (Exception e){
+            logger.info("Unable to download font " + e.getMessage());
         }
 
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("views/first-view.fxml"));

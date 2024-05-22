@@ -2,6 +2,11 @@ package org.hse.brina.utils;
 
 import org.hse.brina.Config;
 
+/**
+ * Класс Document отвечает за вид документа в списке всех документов,
+ * содержит информацию о названии документа, уровне доступа, его статусе.
+ */
+
 public class Document {
     private final StringBuilder name;
     private final StringBuilder image = new StringBuilder(Config.getPathToAssets()+"unlocked.png");

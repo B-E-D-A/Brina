@@ -17,6 +17,7 @@
     -fx-border-width: 0.4;
     -fx-background-radius: 8px;
     -fx-border-radius: 8px;
+    -fx-font-family: "Montserrat";
 }
 
 .text-field {
@@ -27,6 +28,7 @@
     -fx-border-width: 0.4;
     -fx-background-radius: 8px;
     -fx-border-radius: 8px;
+    -fx-font-family: "Montserrat";
 }
 
 .button.loadfile {

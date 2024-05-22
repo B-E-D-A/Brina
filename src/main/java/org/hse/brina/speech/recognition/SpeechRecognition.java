@@ -17,7 +17,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-
+/**
+ * SpeechRecognition - класс, который позволяет преобразовывать аудиофайлы в текст с помощью Google Cloud API.
+ */
 public class SpeechRecognition {
 
     private static final Logger logger = LogManager.getLogger();

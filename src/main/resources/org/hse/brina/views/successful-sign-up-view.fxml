@@ -6,6 +6,6 @@
       xmlns="http://javafx.com/javafx"
       fx:controller="org.hse.brina.signin.SuccessfulSignUpController"
       stylesheets="@../css/successful-page-style.css" style="-fx-background-color: white">
-    <Label fx:id="label" text="Start writing your story today!" textAlignment="CENTER" alignment="CENTER"
+    <Label fx:id="label" text="Начните писать свою историю уже сейчас!" textAlignment="CENTER" alignment="CENTER"
            styleClass="success-text"/>
 </VBox>

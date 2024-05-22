@@ -19,7 +19,7 @@
                 </Button>
             </HBox>
             <HBox alignment="CENTER" maxWidth="Infinity" prefWidth="426">
-                <Text style="-fx-text-fill: #101d2f ; -fx-font-size: 16px; -fx-alignment: right" text="Documents"
+                <Text style="-fx-text-fill: #101d2f ; -fx-font-size: 16px; -fx-alignment: right" text="Документы"
                       textAlignment="CENTER">
                     <font>
                         <Font name="Baskerville Old Face" size="16.0"/>
@@ -27,7 +27,7 @@
                 </Text>
             </HBox>
             <HBox alignment="CENTER" minWidth="70" prefHeight="35.0" prefWidth="70.0" maxWidth="Infinity">
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-fill: #101d2f;" text="Access">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-fill: #101d2f;" text="Доступ">
                     <font>
                         <Font name="Baskerville Old Face" size="16.0"/>
                     </font>
@@ -35,7 +35,7 @@
             </HBox>
             <HBox alignment="CENTER" minWidth="70" prefHeight="35.0" prefWidth="70.0" maxWidth="Infinity">
                 <Text strokeType="OUTSIDE" strokeWidth="0.0"
-                      style="-fx-text-fill: #101d2f; -fx-font-size: 16px; -fx-alignment: right;" text="Status"
+                      style="-fx-text-fill: #101d2f; -fx-font-size: 16px; -fx-alignment: right;" text="Статус"
                       textAlignment="RIGHT">
                     <font>
                         <Font name="Baskerville Old Face" size="16.0"/>

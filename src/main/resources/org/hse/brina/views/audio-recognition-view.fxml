@@ -9,21 +9,21 @@
       fx:controller="org.hse.brina.utils.AudioRecognitionController">
     <VBox fx:id="textVBox" alignment="CENTER" spacing="10" style="-fx-background-color: white; -fx-padding: 10">
         <HBox fx:id="audioHBox" alignment="CENTER" maxHeight="50" spacing="10" styleClass="white-box">
-            <Text styleClass="simple-text" text="Audio:"/>
+            <Text styleClass="simple-text" text="Аудио:"/>
             <Text fx:id="audioName" styleClass="simple-text"/>
         </HBox>
         <HBox alignment="CENTER" maxHeight="50" spacing="10" styleClass="white-box">
-            <Button fx:id="loadAudio" onAction="#loadAudio" styleClass="access-button" text="Load"/>
-            <Button fx:id="recordAudioButton" onAction="#recordAudio" styleClass="access-button" text="Record"/>
+            <Button fx:id="loadAudio" onAction="#loadAudio" styleClass="access-button" text="Загрузить"/>
+            <Button fx:id="recordAudioButton" onAction="#recordAudio" styleClass="access-button" text="Записать"/>
             <Button fx:id="speechRecognitionButton" onAction="#recognizeSpeech" styleClass="dark-button"
-                    text="Recognize Speech"/>
+                    text="Распознать в текст"/>
         </HBox>
     </VBox>
     <VBox spacing="10" style="-fx-background-color: white">
         <TextArea fx:id="resultArea"
                   style="-fx-background-color: white; -fx-border-color: #101d2f; -fx-border-width: 1px; -fx-border-radius: 8px"/>
         <HBox fx:id="pasteHBox" alignment="CENTER_RIGHT" maxHeight="50" spacing="10" styleClass="white-box">
-            <Button fx:id="Paste" onAction="#pasteResult" styleClass="dark-button" text="Paste"/>
+            <Button fx:id="Paste" onAction="#pasteResult" styleClass="dark-button" text="Вставить"/>
         </HBox>
     </VBox>
 </VBox>

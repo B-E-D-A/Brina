@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 
 public class GPTServer {
     public static String getGPTProcessing(String query, String text) throws URISyntaxException, IOException, InterruptedException {
-        String json = constructRequest("\"" + query + "\"", "\"" + text + "\"");
+        String json = constructRequest(query, text);
         Dotenv dotenv = Dotenv.configure().directory("./.env").load();
         String apiKey = dotenv.get("GPT_API_KEY");
         HttpRequest request = HttpRequest.newBuilder().uri(new URI("https://llm.api.cloud.yandex.net/foundationModels/v1/completion")).POST(HttpRequest.BodyPublishers.ofString(json)).header("Content-Type", "application/json").header("Authorization", "Api-key " + apiKey).build();

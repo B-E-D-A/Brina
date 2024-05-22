@@ -346,10 +346,9 @@ public class RichTextDemo extends Application {
         HBox documentNameHBox = new HBox();
         Button shareButton = new Button();
         shareButton.setText("Share");
-        shareButton.setStyle("");
         shareButton.setOnAction(e -> showPopupWindow(primaryStage, documentName));
         shareButton.setAlignment(Pos.TOP_RIGHT);
-        shareButton.setStyle("-fx-background-color: #3d6dac; -fx-text-fill: white; -fx-font-size: 13px; fx-border-color: #3d6dac; -fx-border-width: 1px; -fx-background-radius: 8px; -fx-border-radius: 8px; -fx-margin-right: 10px;");
+        shareButton.setStyle("-fx-background-color: #3d6dac; -fx-text-fill: white; -fx-font-size: 13px; fx-border-color: #3d6dac; -fx-border-width: 1px; -fx-background-radius: 8px; -fx-border-radius: 8px; -fx-margin-right: 10px; -fx-font-family: \"Montserrat\";");
         documentNameHBox.setStyle("-fx-spacing: 10");
 
         HBox featuresHBox = new HBox();

@@ -22,6 +22,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * Класс ProjectsController отвечает за выгрузку документов пользователя,
+ * управление представлением списка документов в приложении.
+*/
+
 public class ProjectsController implements Initializable {
     private static final Logger logger = LogManager.getLogger();
     @FXML

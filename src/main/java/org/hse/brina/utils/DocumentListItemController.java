@@ -13,6 +13,10 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * Класс DocumentListItemController отвечает за управление пользовательским интерфейсом одного элемента списка документов
+ */
+
 public class DocumentListItemController implements Initializable {
     @FXML
     public ImageView statusImage;
@@ -33,16 +37,16 @@ public class DocumentListItemController implements Initializable {
         String response = Config.client.receiveMessage();
         if (response.equals("0")) {
             document.setStatus("unlocked");
-            Image lockedImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(Config.getPathToAssets()+"unlocked.png")));
+            Image lockedImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(Config.getPathToAssets() + "unlocked.png")));
             statusImage.setImage(lockedImage);
         } else {
             document.setStatus("locked");
-            Image lockedImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(Config.getPathToAssets()+"locked.png")));
+            Image lockedImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(Config.getPathToAssets() + "locked.png")));
             statusImage.setImage(lockedImage);
         }
         if (document.getAccess().equals("r")) {
             accessText.setText("reader");
-        } else{
+        } else {
             accessText.setText("writer");
         }
     }

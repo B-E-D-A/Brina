@@ -12,7 +12,7 @@
     <VBox fx:id="IDVBox" alignment="CENTER">
         <HBox alignment="CENTER" spacing="10">
             <TextField fx:id="EnterIdField" prefHeight="50" prefWidth="200" styleClass="login-field"/>
-            <Button fx:id="Enter" onAction="#openEnterButton" styleClass="file-button" text="Enter Id">
+            <Button fx:id="Enter" onAction="#openEnterButton" styleClass="file-button" text="Введите ID">
             </Button>
         </HBox>
     </VBox>

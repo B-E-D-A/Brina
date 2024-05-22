@@ -51,7 +51,10 @@ public class SignUpController extends SignInController {
         if (!password.matches(pattern)) {
             passwordRulesVBox.getChildren().clear();
             Text passwordRules = new Text();
-            passwordRules.setText("Weak password. The password must contain a lowercase and\nan uppercase letter, as well as a number or special character");
+            passwordRules.setText("""
+                    Пароль должен состоять из строчной и прописной букв,
+                    а также цифры или специального символа и содержать
+                    как минимум 8 символов""");
             passwordRules.setFill(Color.valueOf("#e0850c"));
             passwordRulesVBox.getChildren().add(passwordRules);
             Text emptyText = new Text();
@@ -70,7 +73,7 @@ public class SignUpController extends SignInController {
             String response = Config.client.receiveMessage();
             try {
                 if (response.equals("User with the same name already exists")) {
-                    invalidLoginField.setText("User with this name already exists");
+                    invalidLoginField.setText("Пользователь с таким именем уже существует");
                     invalidLoginField.setVisible(true);
                 } else if (response.equals("User is registered")) {
                     loadScene(stage, Config.getPathToViews()+"successful-sign-up-view.fxml");

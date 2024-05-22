@@ -28,6 +28,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * Класс CollaborationController отвечает за открытие документа по его идентификатору для совместной работы над ним.
+ */
+
 public class CollaborationController {
 
     private static final Logger logger = LogManager.getLogger();

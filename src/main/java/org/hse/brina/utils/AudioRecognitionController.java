@@ -17,6 +17,11 @@ import org.hse.brina.speech.recognition.SpeechRecognition;
 
 import java.io.File;
 
+/**
+ * Класс AudioRecognitionController отвечает за работу с пользовательским интерфейсом
+ * и логику для функций распознавания речи в текст.
+ */
+
 public class AudioRecognitionController {
     private static final Logger logger = LogManager.getLogger();
     public Button loadAudio;
