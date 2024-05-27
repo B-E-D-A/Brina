@@ -1,10 +1,11 @@
+@import "colors.css";
+
 root {
-    -fx-background-color: white;
+    -fx-background-color: -fx-base-color;
 }
 
 .success-text {
-    -fx-font-size: 24px;
-    /*-fx-font-weight: bold;*/
-    -fx-text-fill: #3d6dac;
+    -fx-font-size: 22px;
+    -fx-text-fill: -fx-dark-primary-color;
     -fx-font-family: "Montserrat";
 }

@@ -224,7 +224,7 @@ public class Server {
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, username);
                 statement.setString(2, filename);
-                statement.setString(3, Config.getProjectPath().substring(0, Config.getProjectPath().length() - 19) + "documents/" + filename);
+                statement.setString(3, Config.getProjectPath().substring(0, Config.getProjectPath().length() - Config.getAppNameLength()) + "documents/" + filename);
                 statement.setInt(4, Math.abs(name.hashCode()));
                 statement.setString(5, "w");
                 statement.setInt(6, 0);
@@ -241,7 +241,7 @@ public class Server {
                 statement.setString(1, username);
                 String documentName = filename + ".rtfx";
                 statement.setString(2, documentName);
-                statement.setString(3, Config.getProjectPath().substring(0, Config.getProjectPath().length() - 19) + "documents/" + documentName);
+                statement.setString(3, Config.getProjectPath().substring(0, Config.getProjectPath().length() - Config.getAppNameLength()) + "documents/" + documentName);
                 statement.setInt(4, Math.abs(filename.hashCode()));
                 statement.setString(5, access);
                 statement.setInt(6, 0);

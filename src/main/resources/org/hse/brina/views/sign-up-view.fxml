@@ -9,14 +9,14 @@
 <Pane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400" prefWidth="600" styleClass="white-box"
       stylesheets="@../css/sign-in-page-style.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
       fx:controller="org.hse.brina.signin.SignUpController">
-    <HBox alignment="CENTER" prefHeight="400" prefWidth="600" styleClass="white-box">
+    <HBox alignment="CENTER" prefHeight="400" prefWidth="600" styleClass="background-signup">
         <padding>
             <Insets top="50.0"/>
         </padding>
-        <VBox prefWidth="140" style="--fxbackground-color: white"/>
-        <VBox prefHeight="297.0" prefWidth="448.0" style="-fx-background-color: white;">
+        <VBox prefWidth="140"/>
+        <VBox prefHeight="297.0" prefWidth="448.0">
             <padding>
-                <Insets bottom="20.0" left="16.0" right="16.0" top="20.0"/>
+                <Insets bottom="20.0" left="16.0" right="16.0" top="55.0"/>
             </padding>
             <Text styleClass="label" text="Регистрация"/>
             <Text text=""/>
@@ -67,6 +67,6 @@
                 </HBox>
             </VBox>
         </VBox>
-        <VBox prefWidth="140" style="--fxbackground-color: white"/>
+        <VBox prefWidth="140"/>
     </HBox>
 </Pane>

@@ -5,19 +5,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: white; -fx-padding: 10"
-      stylesheets="@../css/sign-in-page-style.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
+<?import javafx.geometry.Insets?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="background-simple"
+      stylesheets="@../css/main-page-style.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
       fx:controller="org.hse.brina.utils.YandexGptController">
-    <VBox fx:id="vBox" alignment="CENTER" spacing="10" styleClass="white-box" prefWidth="640">
+    <VBox fx:id="vBox" alignment="CENTER" spacing="10" prefWidth="640" style="-fx-background-color: transparent">
         <Text text="YandexGPT" styleClass="simple-text"/>
-        <TextArea fx:id="gptTextArea"
-                  style="-fx-background-color: white; -fx-border-color: #101d2f; -fx-border-width: 1px; -fx-border-radius: 8px"
-                  editable="false"/>
-        <HBox spacing="10" styleClass="white-box" fx:id="hBox">
-            <TextArea fx:id="userTextArea" maxHeight="120" prefHeight="30" prefWidth="540"
-                      style="-fx-background-color: white; -fx-border-color: #101d2f; -fx-border-width: 1px; -fx-border-radius: 8px"/>
-            <Button fx:id="sendButton" prefHeight="30" prefWidth="30" maxHeight="30" maxWidth="30"
+        <TextArea fx:id="gptTextArea" styleClass="yandex" editable="false"/>
+        <HBox spacing="10" fx:id="hBox">
+            <TextArea fx:id="userTextArea" maxHeight="120" prefHeight="50" prefWidth="550" styleClass="yandex"/>
+            <Button fx:id="sendButton" prefHeight="35" prefWidth="35" maxHeight="35" maxWidth="35"
                     styleClass="send-button" onAction="#sendButtonClicked"/>
         </HBox>
+        <padding>
+            <Insets left="20" right="20" top="20" bottom="20"/>
+        </padding>
     </VBox>
 </VBox>

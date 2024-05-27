@@ -99,18 +99,22 @@ public class SignInController {
         boolean isValid = true;
         eyeButton.setOnAction(Event::consume);
         if (loginField.getText().isEmpty()) {
+            loginField.setVisible(false);
             invalidLoginField.setText("Введите свой логин");
             invalidLoginField.setVisible(true);
             isValid = false;
         } else {
             invalidLoginField.setVisible(false);
+            loginField.setVisible(true);
         }
         if (passwordField.getText().isEmpty()) {
+            passwordField.setVisible(false);
             invalidPasswordField.setText("Введите свой пароль");
             invalidPasswordField.setVisible(true);
             isValid = false;
         } else {
             invalidPasswordField.setVisible(false);
+            passwordField.setVisible(true);
         }
         return isValid;
     }
@@ -119,20 +123,25 @@ public class SignInController {
     private void signInButtonClicked() {
         Stage stage = (Stage) signInButton.getScene().getWindow();
         boolean isValid = checkIfFieldsAreEmpty();
+        if (!isValid) return;
         String username = loginField.getText();
         String password = passwordField.getText();
         Config.client.setName(username);
         Config.client.sendMessage("signInUser " + username + " " + getHash(password + password.hashCode()));
         String response = Config.client.receiveMessage();
         if (response.equals("User with this name not found")) {
-            invalidLoginField.setText("Пользователя с таким именем не существует");
+            loginField.setVisible(false);
+            invalidLoginField.setText("Пользователя с таким именем нет");
             invalidLoginField.setVisible(true);
             setEyeButtonAction();
         } else if (response.equals("Wrong password")) {
+            passwordField.setVisible(false);
             invalidPasswordField.setText("Неверный пароль");
             invalidPasswordField.setVisible(true);
             setEyeButtonAction();
         } else if (isValid && response.equals("User logged in")) {
+            loginField.setVisible(true);
+            passwordField.setVisible(true);
             enter(stage);
         }
     }
@@ -159,6 +168,8 @@ public class SignInController {
     private void hideWarningAboutEmptyField(TextField field) {
         if (field.isVisible()) {
             field.setVisible(false);
+            if (field.equals(invalidLoginField)) loginField.setVisible(true);
+            if (field.equals(invalidPasswordField)) passwordField.setVisible(true);
         }
     }
 

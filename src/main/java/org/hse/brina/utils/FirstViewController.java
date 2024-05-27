@@ -23,9 +23,9 @@ import java.util.ResourceBundle;
  * затем выполняет переход на окно входа в систему.
  */
 public class FirstViewController implements Initializable {
-    @FXML
-    private Label text;
     private static final Logger logger = LogManager.getLogger();
+    @FXML
+    public Label text;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -52,7 +52,7 @@ public class FirstViewController implements Initializable {
     private void openWelcomeWindow() {
         Stage stage = (Stage) text.getScene().getWindow();
         try {
-            loadScene(stage, Config.getPathToViews()+"sign-in-view.fxml");
+            loadScene(stage, Config.getPathToViews() + "sign-in-view.fxml");
         } catch (IOException e) {
             logger.error("Scene configuration file not found. " + e.getMessage());
         }

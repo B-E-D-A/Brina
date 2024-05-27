@@ -86,7 +86,7 @@ public class CollaborationController {
                 popupStage.setX(centerX);
                 popupStage.setY(centerY);
             }
-            try (InputStream iconStream = getClass().getResourceAsStream(Config.getPathToAssets() + "small-icon.png")) {
+            try (InputStream iconStream = getClass().getResourceAsStream(Config.getPathToAssets() + "icon.png")) {
                 Image icon = new Image(iconStream);
                 popupStage.getIcons().add(icon);
             } catch (Exception e) {
@@ -110,7 +110,7 @@ public class CollaborationController {
     public void backButtonClicked(ActionEvent actionEvent) {
         Stage stage = (Stage) backButton.getScene().getWindow();
         try {
-            loadScene(stage, Config.getPathToViews()+"main-window-view.fxml");
+            loadScene(stage, Config.getPathToViews() + "main-window-view.fxml");
         } catch (IOException e) {
             logger.error("Scene configuration file not found. " + e.getMessage());
         }

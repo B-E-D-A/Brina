@@ -1,8 +1,10 @@
+@import "colors.css";
+
 .dark-button {
-    -fx-background-color: #3d6dac;
-    -fx-text-fill: white;
+    -fx-background-color: -fx-dark-primary-color;
+    -fx-text-fill: -fx-base-color;
     -fx-font-size: 14px;
-    -fx-border-color: #3d6dac;
+    -fx-border-color: -fx-dark-primary-color;
     -fx-border-width: 1px;
     -fx-background-radius: 8px;
     -fx-border-radius: 8px;
@@ -11,18 +13,18 @@
 }
 
 .light-button {
-    -fx-background-color: white;
-    -fx-text-fill: #3d6dac;
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-dark-color;
     -fx-font-size: 14px;
     -fx-margin-right: 10px;
     -fx-font-family: "Montserrat";
 }
 
 .access-button {
-    -fx-background-color: white;
-    -fx-text-fill: #3d6dac;
+    -fx-background-color: -fx-base-color;
+    -fx-text-fill: -fx-dark-primary-color;
     -fx-font-size: 14px;
-    -fx-border-color: #3d6dac;
+    -fx-border-color: -fx-dark-primary-color;
     -fx-border-width: 1px;
     -fx-background-radius: 8px;
     -fx-border-radius: 8px;
@@ -33,44 +35,44 @@
 .label {
     -fx-font-size: 20px;
     -fx-font-weight: bold;
-    -fx-text-fill: #101d2f;
+    -fx-text-fill: -fx-dark-color;
     -fx-font-family: "Montserrat";
 }
 
 .simple-text {
     -fx-font-size: 14px;
-    -fx-text-fill: #101d2f;
+    -fx-text-fill: -fx-dark-color;
     -fx-font-family: "Montserrat";
 }
 
 .small-text {
     -fx-font-size: 10px;
-    -fx-text-fill: grey;
+    -fx-text-fill: -fx-dark-color;
     -fx-font-weight: lighter;
     -fx-font-family: "Montserrat";
 }
 
 .white-box {
-    -fx-background-color: white;
+    -fx-background-color: -fx-base-color;
 }
 
 .login-warning-text {
-    -fx-background-color: #f6ecde;
-    -fx-border-color: grey;
+    -fx-background-color: rgba(200, 67, 54, 0.2);
+    -fx-border-color: -fx-dark-color;
     -fx-border-width: 1px;
     -fx-background-radius: 8px;
     -fx-border-radius: 8px;
-    -fx-text-fill: #e0850c;
+    -fx-text-fill: -fx-accent-color;
     -fx-font-size: 14px;
     -fx-font-weight: lighter;
     -fx-font-family: "Montserrat";
 }
 
 .password-warning-text {
-    -fx-background-color: #f6ecde;
-    -fx-border-color: grey;
+    -fx-background-color: rgba(200, 67, 54, 0.2);
+    -fx-border-color: -fx-dark-color;
     -fx-border-width: 1px;
-    -fx-text-fill: #e0850c;
+    -fx-text-fill: -fx-accent-color;
     -fx-font-size: 14px;
     -fx-font-weight: lighter;
     -fx-background-radius: 8px 0 0 8px;
@@ -79,32 +81,34 @@
 }
 
 .login-field {
-    -fx-background-color: white;
-    -fx-text-fill: grey;
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-dark-color;
     -fx-font-size: 14px;
-    -fx-border-color: grey;
+    -fx-border-color: -fx-dark-color;
     -fx-border-width: 1px;
     -fx-background-radius: 8px;
     -fx-border-radius: 8px;
     -fx-font-family: "Montserrat";
+    -fx-prompt-text-fill: -fx-dark-color;
 }
 
 .password-field {
-    -fx-background-color: white;
-    -fx-text-fill: grey;
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-dark-color;
     -fx-font-size: 14px;
-    -fx-border-color: grey;
+    -fx-border-color: -fx-dark-color;
     -fx-border-width: 1px;
     -fx-background-radius: 8px 0 0 8px;
     -fx-border-radius: 8px 0 0 8px;
     -fx-font-family: "Montserrat";
+    -fx-prompt-text-fill: -fx-dark-color;
 }
 
 .eye-field {
-    -fx-background-color: white;
-    -fx-text-fill: grey;
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-dark-color;
     -fx-font-size: 14px;
-    -fx-border-color: grey;
+    -fx-border-color: -fx-dark-color;
     -fx-border-width: 1px;
     -fx-background-radius: 0 8px 8px 0;
     -fx-border-radius: 0 8px 8px 0;
@@ -117,16 +121,27 @@
 
 .text-area {
     -fx-font-size: 14px;
-    -fx-text-fill: #101d2f;
+    -fx-text-fill: -fx-dark-color;
     -fx-alignment: center;
     -fx-border-color: transparent;
-    -fx-background-color: white;
+    -fx-background-color: -fx-base-color;
     -fx-font-family: "Montserrat";
 }
 
-.send-button {
-    -fx-background-image: url(../assets/send.png);
-    -fx-background-size: cover;
-    -fx-background-position: left center;
-    -fx-background-color: white;
+.background-signin {
+    -fx-background-color: -fx-base-color;
+    -fx-background-image: url(/org/hse/brina/assets/sign-in.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-padding: 25px;
+}
+
+.background-signup {
+    -fx-background-color: -fx-base-color;
+    -fx-background-image: url(/org/hse/brina/assets/sign-up.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-padding: 20px;
 }

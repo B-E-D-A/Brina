@@ -11,30 +11,21 @@
     <HBox alignment="TOP_RIGHT">
         <VBox alignment="TOP_CENTER" spacing="10" style="-fx-padding: 40;">
             <HBox alignment="CENTER">
-                <ImageView fitWidth="65" fitHeight="60" preserveRatio="true">
+                <ImageView fitWidth="50" fitHeight="50" preserveRatio="true">
                     <Image url="@../assets/user-icon.png"/>
                 </ImageView>
             </HBox>
             <HBox spacing="10">
                 <Button fx:id="create_new" prefWidth="180" prefHeight="27" onAction="#openCreateButton"
                         styleClass="file-button" text="Новый документ"/>
-                <ImageView fitWidth="30" fitHeight="30">
-                    <Image url="@../assets/new-document.png"/>
-                </ImageView>
             </HBox>
             <HBox spacing="10">
                 <Button fx:id="collab" prefWidth="180" prefHeight="27" onAction="#openCollabButton"
                         styleClass="file-button" text="Совместная работа"/>
-                <ImageView fitWidth="30" fitHeight="30">
-                    <Image url="@../assets/collaboration.png"/>
-                </ImageView>
             </HBox>
             <HBox spacing="10">
                 <Button fx:id="my" prefWidth="180" prefHeight="27" styleClass="file-button" text="Мои документы"
                         onAction="#openMyProdButton"/>
-                <ImageView fitWidth="30" fitHeight="30">
-                    <Image url="@../assets/projects-list.png"/>
-                </ImageView>
             </HBox>
             <HBox spacing="10" alignment="CENTER">
                 <Button fx:id="logOutButton" prefWidth="100" prefHeight="27" styleClass="log-out" text="Выйти"

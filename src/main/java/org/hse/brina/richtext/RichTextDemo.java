@@ -18,7 +18,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -68,9 +67,9 @@ public class RichTextDemo extends Application {
     private static final Logger logger = LogManager.getLogger();
     public final FoldableStyledArea area = new FoldableStyledArea();
     public final SuspendableNo updatingToolbar = new SuspendableNo();
-    public String previousView = Config.getPathToViews()+"main-window-view.fxml";
-    public Stage mainStage;
     private final StringBuilder documentId = new StringBuilder();
+    public String previousView = Config.getPathToViews() + "main-window-view.fxml";
+    public Stage mainStage;
     private TextField documentNameField = new TextField();
     private Scene mainScene;
 
@@ -112,16 +111,6 @@ public class RichTextDemo extends Application {
         backBtn.setPrefWidth(25);
         backBtn.setPrefHeight(25);
         backBtn.setTooltip(new Tooltip("Back"));
-        ImageView imageView = new ImageView();
-        try {
-            Image image = new Image("/org/hse/brina/richtext/document-icon.png");
-            imageView = new ImageView(image);
-            imageView.setFitHeight(60);
-            imageView.setFitWidth(60);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-        }
-
         Button undoBtn = createButton("undo", area::undo, "Undo");
         Button redoBtn = createButton("redo", area::redo, "Redo");
         Button cutBtn = createButton("cut", area::cut, "Cut");
@@ -164,7 +153,7 @@ public class RichTextDemo extends Application {
         HBoxText.setPadding(new Insets(10));
         ColorPicker textColorPicker = new ColorPicker(Color.BLACK);
         textColorPicker.setStyle(" -fx-color-label-visible: false;");
-        Text textColorText = new Text("Text");
+        Text textColorText = new Text("Текст");
         textColorText.setStyle("-fx-text-alignment: left; -fx-alignment: center-left;-fx-font-size: 12px");
         HBoxText.getChildren().addAll(textColorPicker, textColorText);
 
@@ -173,7 +162,7 @@ public class RichTextDemo extends Application {
         HBoxBackground.setPadding(new Insets(10));
         ColorPicker backgroundColorPicker = new ColorPicker();
         backgroundColorPicker.setStyle(" -fx-color-label-visible: false;");
-        Text backgroundColorText = new Text("Background");
+        Text backgroundColorText = new Text("Фон");
         backgroundColorText.setStyle("-fx-text-alignment: left; -fx-alignment: center-left; -fx-font-size: 12px");
         HBoxBackground.getChildren().addAll(backgroundColorPicker, backgroundColorText);
 
@@ -328,15 +317,15 @@ public class RichTextDemo extends Application {
         });
 
         TextField documentName = new TextField();
-        documentName.setText("New Document");
+        documentName.setText("Новый документ");
         documentNameField = documentName;
-        documentName.setStyle("-fx-font-size: 13px");
+        documentName.setStyle("-fx-font-size: 12px;");
         documentName.setMaxWidth(200);
         documentName.setMaxHeight(50);
         documentName.setPrefHeight(30);
         documentName.setPrefWidth(150);
         documentName.setAlignment(Pos.BASELINE_LEFT);
-        ToolBar toolBar1 = new ToolBar(backBtn, loadBtn, saveBtn, new Separator(Orientation.VERTICAL), undoBtn, redoBtn, new Separator(Orientation.VERTICAL), cutBtn, copyBtn, pasteBtn, new Separator(Orientation.VERTICAL), boldBtn, italicBtn, underlineBtn, strikeBtn, new Separator(Orientation.VERTICAL), alignLeftBtn, alignCenterBtn, alignRightBtn, alignJustifyBtn, new Separator(Orientation.VERTICAL), increaseIndentBtn, decreaseIndentBtn, new Separator(Orientation.VERTICAL), insertImageBtn, new Separator(Orientation.VERTICAL), HBoxParagraphBackground);
+        ToolBar toolBar1 = new ToolBar(loadBtn, saveBtn, new Separator(Orientation.VERTICAL), undoBtn, redoBtn, new Separator(Orientation.VERTICAL), cutBtn, copyBtn, pasteBtn, new Separator(Orientation.VERTICAL), boldBtn, italicBtn, underlineBtn, strikeBtn, new Separator(Orientation.VERTICAL), alignLeftBtn, alignCenterBtn, alignRightBtn, alignJustifyBtn, new Separator(Orientation.VERTICAL), increaseIndentBtn, decreaseIndentBtn, new Separator(Orientation.VERTICAL), insertImageBtn, new Separator(Orientation.VERTICAL), HBoxParagraphBackground);
 
         String toolBarStyle = "-fx-background-color:white; -fx-padding: 0px;";
         toolBar1.setStyle(toolBarStyle);
@@ -345,10 +334,10 @@ public class RichTextDemo extends Application {
 
         HBox documentNameHBox = new HBox();
         Button shareButton = new Button();
-        shareButton.setText("Share");
+        shareButton.setText("Поделиться");
         shareButton.setOnAction(e -> showPopupWindow(primaryStage, documentName));
         shareButton.setAlignment(Pos.TOP_RIGHT);
-        shareButton.setStyle("-fx-background-color: #3d6dac; -fx-text-fill: white; -fx-font-size: 13px; fx-border-color: #3d6dac; -fx-border-width: 1px; -fx-background-radius: 8px; -fx-border-radius: 8px; -fx-margin-right: 10px; -fx-font-family: \"Montserrat\";");
+        shareButton.setStyle("-fx-background-color: #97bd89ff; -fx-text-fill: white; -fx-font-size: 13px; fx-border-color: rgba(67, 76, 85, 0.5); -fx-border-width: 1px; -fx-background-radius: 8px; -fx-border-radius: 8px; -fx-margin-right: 10px; -fx-font-family: \"Montserrat\";");
         documentNameHBox.setStyle("-fx-spacing: 10");
 
         HBox featuresHBox = new HBox();
@@ -362,7 +351,7 @@ public class RichTextDemo extends Application {
             popupVoiceStage.initModality(Modality.NONE);
             AudioRecognitionController controller = new AudioRecognitionController();
             controller.documentArea = area;
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource(Config.getPathToViews()+"audio-recognition-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource(Config.getPathToViews() + "audio-recognition-view.fxml"));
             loader.setControllerFactory(param -> controller);
             Parent root;
             try {
@@ -372,7 +361,7 @@ public class RichTextDemo extends Application {
             }
             Scene scene = new Scene(root, mainStage.getScene().getWidth(), mainStage.getScene().getHeight());
             popupVoiceStage.setScene(scene);
-            try (InputStream iconStream = getClass().getResourceAsStream(Config.getPathToAssets()+"small-icon.png")) {
+            try (InputStream iconStream = getClass().getResourceAsStream(Config.getPathToAssets() + "icon.png")) {
                 Image icon = new Image(iconStream);
                 popupVoiceStage.getIcons().add(icon);
             } catch (Exception error) {
@@ -409,7 +398,7 @@ public class RichTextDemo extends Application {
             Stage popupChatStage = new Stage();
             popupChatStage.initOwner(primaryStage);
             popupChatStage.initModality(Modality.NONE);
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource(Config.getPathToViews()+"yandex-gpt-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource(Config.getPathToViews() + "yandex-gpt-view.fxml"));
             Parent root;
             try {
                 root = loader.load();
@@ -418,7 +407,7 @@ public class RichTextDemo extends Application {
             }
             Scene scene = new Scene(root, mainStage.getScene().getWidth(), mainStage.getScene().getHeight());
             popupChatStage.setScene(scene);
-            try (InputStream iconStream = getClass().getResourceAsStream(Config.getPathToAssets()+"small-icon.png")) {
+            try (InputStream iconStream = getClass().getResourceAsStream(Config.getPathToAssets() + "icon.png")) {
                 Image icon = new Image(iconStream);
                 popupChatStage.getIcons().add(icon);
             } catch (Exception error) {
@@ -436,7 +425,7 @@ public class RichTextDemo extends Application {
         featuresHBox.setMaxWidth(500);
         HBox.setHgrow(featuresHBox, Priority.ALWAYS);
 
-        documentNameHBox.getChildren().addAll(documentName, shareButton, featuresHBox);
+        documentNameHBox.getChildren().addAll(backBtn, documentName, featuresHBox, shareButton);
 
         VBox upperToolbarVBox = new VBox();
         upperToolbarVBox.setStyle("-fx-background-color: white; -fx-alignment: TOP_LEFT; -fx-spacing: 1px;");
@@ -450,7 +439,7 @@ public class RichTextDemo extends Application {
         upperToolbarHBox.setAlignment(Pos.TOP_LEFT);
         upperToolbarHBox.setPadding(new Insets(3));
         HBox.setHgrow(upperToolbarHBox, Priority.ALWAYS);
-        upperToolbarHBox.getChildren().addAll(imageView, upperToolbarVBox);
+        upperToolbarHBox.getChildren().addAll(upperToolbarVBox);
 
         ToolBar toolBar2 = new ToolBar(sizeCombo, familyCombo, HBoxText, HBoxBackground);
         toolBar2.setStyle(toolBarStyle);
@@ -486,13 +475,13 @@ public class RichTextDemo extends Application {
             Stage GPTPopupStage = new Stage();
             GPTPopupStage.initOwner(mainStage);
             GPTPopupStage.initModality(Modality.NONE);
-            Text GPTResultText = new Text("YandexGPT result");
+            Text GPTResultText = new Text("YandexGPT");
             GPTResultText.getStyleClass().add("simple-text");
             GPTResultText.setFill(Color.BLACK);
             TextArea GPTArea = new TextArea();
             GPTArea.setWrapText(true);
             GPTArea.setText(textGPT);
-            GPTArea.setStyle("-fx-background-color: white; -fx-border-color: #101d2f; -fx-border-width: 1px; -fx-border-radius: 8px");
+            GPTArea.setStyle("-fx-background-color: white; -fx-border-color: rgba(67, 76, 85, 0.5); -fx-border-width: 1px; -fx-border-radius: 8px");
             GPTArea.setMaxWidth(440);
             GPTArea.setMaxHeight(290);
             GPTArea.setPrefHeight(290);
@@ -502,8 +491,9 @@ public class RichTextDemo extends Application {
             vBox.setSpacing(10);
             vBox.setMaxWidth(300);
             Button pasteButton = new Button();
-            pasteButton.setText("Paste result");
+            pasteButton.setText("Вставить ответ");
             pasteButton.getStyleClass().add("dark-button");
+            pasteButton.setStyle("-fx-background-color: #97bd89ff; -fx-border-color: rgba(67, 76, 85, 0.5)");
             pasteButton.setOnAction(event -> {
                 area.replaceSelection(GPTArea.getText());
                 GPTPopupStage.close();
@@ -515,7 +505,7 @@ public class RichTextDemo extends Application {
             int stageHeight = 300;
             int stageWidth = 450;
             Scene popupScene = new Scene(vBox, stageWidth, stageHeight);
-            popupScene.getStylesheets().add(Config.getPathToCss()+"sign-in-page-style.css");
+            popupScene.getStylesheets().add(Config.getPathToCss() + "sign-in-page-style.css");
             GPTPopupStage.setScene(popupScene);
             if (mainScene != null) {
                 Window previousWindow = mainScene.getWindow();
@@ -524,7 +514,7 @@ public class RichTextDemo extends Application {
                 GPTPopupStage.setX(centerX);
                 GPTPopupStage.setY(centerY);
             }
-            try (InputStream iconStream = getClass().getResourceAsStream(Config.getPathToAssets()+"small-icon.png")) {
+            try (InputStream iconStream = getClass().getResourceAsStream(Config.getPathToAssets() + "icon.png")) {
                 Image icon = new Image(iconStream);
                 GPTPopupStage.getIcons().add(icon);
             } catch (Exception exe) {
@@ -547,12 +537,12 @@ public class RichTextDemo extends Application {
         Stage popupStage = new Stage();
         popupStage.initOwner(primaryStage);
         popupStage.initModality(Modality.APPLICATION_MODAL);
-        Text documentNameText = new Text("Document name:");
-        documentNameText.setStyle("-fx-font-size: 16px");
+        Text documentNameText = new Text("Название:");
+        documentNameText.setStyle("-fx-font-size: 14px; -fx-font-family: \"Montserrat\"; -fx-text-fill: #434c55ff; -fx-background-color: white");
         documentNameText.setFill(Color.BLACK);
         TextField documentNameTextField = new TextField();
         documentNameTextField.setText(documentName.getText());
-        documentNameTextField.setStyle("-fx-font-size: 16px");
+        documentNameTextField.setStyle("-fx-font-size: 14px");
         documentNameTextField.getStyleClass().add("login-field");
         documentNameTextField.setMaxWidth(205);
         documentNameTextField.setMaxHeight(30);
@@ -566,40 +556,44 @@ public class RichTextDemo extends Application {
         nameHBox.setMaxWidth(265);
 
         TextField usersTextField = new TextField();
-        usersTextField.setPromptText("User with access to the document");
+        usersTextField.setPromptText("Пользователь с доступом к документу");
         usersTextField.setPrefWidth(265);
         usersTextField.setPrefHeight(30);
         usersTextField.setMaxWidth(265);
         usersTextField.setMaxHeight(30);
         usersTextField.getStyleClass().add("login-field");
+        usersTextField.setStyle("-fx-font-size: 12px; -fx-font-family: \"Montserrat\"; -fx-text-fill: #434c55ff; -fx-background-color: white");
         usersTextField.setAlignment(Pos.CENTER);
 
-        Text accessText = new Text("Access rights:");
-        accessText.setStyle("-fx-font-size: 16 px");
+        Text accessText = new Text("Права доступа:");
+        accessText.setStyle("-fx-font-size: 14px; -fx-font-family: \"Montserrat\"; -fx-text-fill: #434c55ff");
         accessText.setFill(Color.BLACK);
         accessText.setTextAlignment(TextAlignment.CENTER);
         Button readerButton = new Button();
-        readerButton.setText("Reader");
+        readerButton.setText("Читатель");
         readerButton.getStyleClass().add("access-button");
+        readerButton.setStyle("-fx-background-color: white");
         Button editorButton = new Button();
-        editorButton.setText("Editor");
+        editorButton.setText("Редактор");
         editorButton.getStyleClass().add("access-button");
+        editorButton.setStyle("-fx-background-color: white");
         StringBuilder rights = new StringBuilder();
         readerButton.setOnAction(event -> {
-            editorButton.setStyle("-fx-background-color: white; -fx-text-fill: #3d6dac; -fx-border-color: #3d6dac;");
+            editorButton.setStyle("-fx-background-color: white; -fx-text-fill: #5479B8; -fx-border-color: #5479B8;");
             rights.replace(0, rights.length(), "r");
-            readerButton.setStyle("-fx-background-color: #e0850c; -fx-text-fill: #101d2f; -fx-border-color: #101d2f;");
+            readerButton.setStyle("-fx-background-color: #97bd89ff; -fx-text-fill: #434c55ff; -fx-border-color: #434c55ff;");
         });
         editorButton.setOnAction(event -> {
-            readerButton.setStyle("-fx-background-color: white; -fx-text-fill: #3d6dac; -fx-border-color: #3d6dac;");
+            readerButton.setStyle("-fx-background-color: white; -fx-text-fill: #5479B8; -fx-border-color: #5479B8;");
             rights.replace(0, rights.length(), "w");
-            editorButton.setStyle("-fx-background-color: #e0850c; -fx-text-fill: #101d2f; -fx-border-color: #101d2f;");
+            editorButton.setStyle("-fx-background-color: #97bd89ff; -fx-text-fill: #434c55ff; -fx-border-color: #434c55ff;");
         });
         HBox rightsHBox = new HBox();
         rightsHBox.setSpacing(10);
         rightsHBox.setAlignment(Pos.CENTER);
         rightsHBox.getChildren().addAll(readerButton, editorButton);
         rightsHBox.getStyleClass().add("white-box");
+        rightsHBox.setStyle("-fx-background-color: white");
 
         VBox shareVBox = new VBox();
         shareVBox.setPrefWidth(265);
@@ -613,7 +607,7 @@ public class RichTextDemo extends Application {
         VBox buttonsVBox = new VBox();
         buttonsVBox.setAlignment(Pos.CENTER);
         Button keyButton = new Button();
-        keyButton.setText("Share access");
+        keyButton.setText("Открыть доступ");
         keyButton.getStyleClass().add("dark-button");
         keyButton.setPrefWidth(265);
         keyButton.setAlignment(Pos.CENTER);
@@ -621,6 +615,7 @@ public class RichTextDemo extends Application {
         VBox popupLayout = new VBox(nameHBox, usersTextField, accessText, buttonsVBox, keyButton);
         popupLayout.setAlignment(Pos.CENTER);
         popupLayout.getStyleClass().add("white-box");
+        popupLayout.setStyle("-fx-background-color: white");
         popupLayout.setSpacing(10);
         keyButton.setOnAction(event -> {
             shareVBox.getChildren().clear();
@@ -631,8 +626,8 @@ public class RichTextDemo extends Application {
 
                 int ID = documentNameTextField.getText().hashCode();
                 documentId.replace(0, documentId.length(), Integer.toString(ID));
-                Text shareText = new Text(usersTextField.getText() + " now has the access by the key: ");
-                shareText.setStyle("-fx-font-size: 14 px");
+                Text shareText = new Text("У " + usersTextField.getText() + " теперь есть доступ по ключу:");
+                shareText.setStyle("-fx-font-size: 14px; -fx-font-family: \"Montserrat\"; -fx-text-fill: #434c55ff");
                 shareText.setFill(Color.BLACK);
                 shareText.setTextAlignment(TextAlignment.CENTER);
                 IDArea.setText(Integer.toString(Math.abs(ID)));
@@ -643,18 +638,18 @@ public class RichTextDemo extends Application {
                 IDArea.setPrefHeight(20);
                 IDArea.setMaxHeight(20);
                 IDArea.setEditable(false);
-                IDArea.setStyle("-fx-font-size: 16px");
+                IDArea.setStyle("-fx-font-size: 14px; -fx-font-family: \"Montserrat\"; -fx-text-fill: #434c55ff; -fx-background-color: white");
                 IDArea.getStyleClass().add("text-area");
                 shareVBox.getChildren().addAll(shareText, IDArea);
 
                 VBox globalVBox = new VBox(shareVBox);
                 globalVBox.setAlignment(Pos.CENTER);
-                globalVBox.getStyleClass().add("white-box");
+                globalVBox.setStyle("-fx-background-color: white");
                 globalVBox.setSpacing(10);
                 int smallStageHeight = 85;
                 int smallStageWidth = 310;
                 Scene smallScene = new Scene(globalVBox, smallStageWidth, smallStageHeight);
-                smallScene.getStylesheets().add(Config.getPathToCss()+"sign-in-page-style.css");
+                smallScene.getStylesheets().add(Config.getPathToCss() + "sign-in-page-style.css");
                 IDStage.setScene(smallScene);
                 if (mainScene != null) {
                     Window previousWindow = mainScene.getWindow();
@@ -663,7 +658,7 @@ public class RichTextDemo extends Application {
                     IDStage.setX(centerX);
                     IDStage.setY(centerY);
                 }
-                try (InputStream iconStream = getClass().getResourceAsStream(Config.getPathToAssets()+"small-icon.png")) {
+                try (InputStream iconStream = getClass().getResourceAsStream(Config.getPathToAssets() + "icon.png")) {
                     Image icon = new Image(iconStream);
                     IDStage.getIcons().add(icon);
                 } catch (Exception e) {
@@ -677,11 +672,11 @@ public class RichTextDemo extends Application {
 
         buttonsVBox.getChildren().addAll(rightsHBox, keyButton);
         buttonsVBox.setSpacing(10);
-        buttonsVBox.getStyleClass().add("white-box");
+        buttonsVBox.setStyle("-fx-background-color: white");
         int stageHeight = 250;
         int stageWidth = 310;
         Scene popupScene = new Scene(popupLayout, stageWidth, stageHeight);
-        popupScene.getStylesheets().add(Config.getPathToCss()+"sign-in-page-style.css");
+        popupScene.getStylesheets().add(Config.getPathToCss() + "sign-in-page-style.css");
         popupStage.setScene(popupScene);
         if (mainScene != null) {
             Window previousWindow = mainScene.getWindow();
@@ -690,7 +685,7 @@ public class RichTextDemo extends Application {
             popupStage.setX(centerX);
             popupStage.setY(centerY);
         }
-        try (InputStream iconStream = getClass().getResourceAsStream(Config.getPathToAssets()+"small-icon.png")) {
+        try (InputStream iconStream = getClass().getResourceAsStream(Config.getPathToAssets() + "icon.png")) {
             Image icon = new Image(iconStream);
             popupStage.getIcons().add(icon);
         } catch (Exception e) {
@@ -699,7 +694,6 @@ public class RichTextDemo extends Application {
         popupStage.setOnHidden(event -> {
             if (!documentNameTextField.getText().contentEquals(documentName.getText())) {
                 documentName.setText(documentNameTextField.getText());
-                //обновить имя в БД
             }
         });
         popupStage.setResizable(false);
@@ -783,8 +777,6 @@ public class RichTextDemo extends Application {
             switch (selectedExtension) {
                 case "rtfx" -> loadRTFX(selectedFile);
                 case "txt" -> loadTXT(selectedFile);
-                case "pdf" -> loadPDF(selectedFile);
-                case "docx" -> loadDOCX(selectedFile);
             }
         }
     }
@@ -797,16 +789,9 @@ public class RichTextDemo extends Application {
         fileChooser.getExtensionFilters().addAll(rtfxExtension, txtExtension, pdfExtension, docxExtension);
     }
 
-    private void loadDOCX(File file) {
-    }
-
-    private void loadPDF(File file) {
-    }
-
     private void loadTXT(File file) {
         logger.info("Loading TXT File");
-        try (FileReader reader = new FileReader(file);
-             BufferedReader bufferedReader = new BufferedReader(reader)) {
+        try (FileReader reader = new FileReader(file); BufferedReader bufferedReader = new BufferedReader(reader)) {
             StringBuilder content = new StringBuilder();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -855,12 +840,10 @@ public class RichTextDemo extends Application {
             Path filePath = selectedFile.toPath();
             String fileName = filePath.getFileName().toString();
             String fileExtension = fileChooser.getSelectedExtensionFilter().getExtensions().get(0).substring(2);
-            Path newPath = Paths.get(Config.getProjectPath().substring(0, Config.getProjectPath().length() - 19) + "documents/" + fileName.replace(".rtfx", "." + fileExtension));
+            Path newPath = Paths.get(Config.getProjectPath().substring(0, Config.getProjectPath().length() - Config.getAppNameLength()) + "documents/" + fileName.replace(".rtfx", "." + fileExtension));
             switch (fileExtension) {
                 case "rtfx" -> saveInRTFXFormat(selectedFile);
                 case "txt" -> saveInTXTFormat(selectedFile);
-                case "pdf" -> saveInPDFFormat(selectedFile);
-                case "docx" -> saveInDOCXFormat(selectedFile);
             }
             String name = fileName.replace("." + fileExtension, "");
             documentNameField.setText(name);
@@ -872,12 +855,6 @@ public class RichTextDemo extends Application {
             Config.client.sendMessage("saveDocument " + fileName + " " + Config.client.getName() + " " + name);
             Config.client.sendMessage("unlockDocument " + documentNameField.getText());
         }
-    }
-
-    private void saveInDOCXFormat(File file) {
-    }
-
-    private void saveInPDFFormat(File file) {
     }
 
     private void saveInTXTFormat(File file) {
@@ -894,7 +871,6 @@ public class RichTextDemo extends Application {
 
     public void saveInRTFXFormat(File file) {
         StyledDocument<ParStyle, Either<String, LinkedImage>, TextStyle> doc = area.getDocument();
-        // Use the Codec to save the document in a binary format
         area.getStyleCodecs().ifPresent(codecs -> {
             Codec<StyledDocument<ParStyle, Either<String, LinkedImage>, TextStyle>> codec = ReadOnlyStyledDocument.codec(codecs._1, codecs._2, area.getSegOps());
             try {

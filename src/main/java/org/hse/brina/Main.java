@@ -44,14 +44,14 @@ public class Main extends Application {
             Font.loadFont(getClass().getResourceAsStream("fonts/Montserrat-Regular.ttf"), 20);
             Font.loadFont(getClass().getResourceAsStream("fonts/Montserrat-Bold.ttf"), 20);
             Font.loadFont(getClass().getResourceAsStream("fonts/Montserrat-Light.ttf"), 20);
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.info("Unable to download font " + e.getMessage());
         }
 
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("views/first-view.fxml"));
         Parent root = loader.load();
         stage.setTitle("Brina");
-        try (InputStream iconStream = getClass().getResourceAsStream("assets/small-icon.png")) {
+        try (InputStream iconStream = getClass().getResourceAsStream("assets/icon.png")) {
             Image icon = new Image(iconStream);
             stage.getIcons().add(icon);
         } catch (Exception e) {

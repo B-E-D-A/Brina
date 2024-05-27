@@ -1,10 +1,9 @@
-.root {
-    -fx-background-color: #101d2f;
-}
+@import "colors.css";
 
-.label {
-    -fx-font-size: 130px;
-    -fx-font-weight: bold;
-    -fx-text-fill: white;
-    -fx-font-family: "Baskerville Old Face";
+.root {
+    -fx-background-color: -fx-base-color;
+    -fx-background-image: url(/org/hse/brina/assets/title-page.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
 }

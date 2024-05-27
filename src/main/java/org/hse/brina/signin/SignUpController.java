@@ -11,9 +11,6 @@ import org.apache.logging.log4j.Logger;
 import org.hse.brina.Config;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 /**
  * SignUpController управляет окном регистрации в приложение,
@@ -35,7 +32,7 @@ public class SignUpController extends SignInController {
     private void backButtonClicked() {
         Stage stage = (Stage) backButton.getScene().getWindow();
         try {
-            loadScene(stage, Config.getPathToViews()+"sign-in-view.fxml");
+            loadScene(stage, Config.getPathToViews() + "sign-in-view.fxml");
         } catch (IOException e) {
             logger.error("Scene configuration file not found. " + e.getMessage());
         }
@@ -52,10 +49,10 @@ public class SignUpController extends SignInController {
             passwordRulesVBox.getChildren().clear();
             Text passwordRules = new Text();
             passwordRules.setText("""
-                    Пароль должен состоять из строчной и прописной букв,
-                    а также цифры или специального символа и содержать
-                    как минимум 8 символов""");
-            passwordRules.setFill(Color.valueOf("#e0850c"));
+                    Пароль должен быть не менее 8 символов и содержать
+                    одновременно буквы в разном регистре, а также цифры
+                    или специальный символ""");
+            passwordRules.setFill(Color.valueOf("#C84336"));
             passwordRulesVBox.getChildren().add(passwordRules);
             Text emptyText = new Text();
             emptyText.setText(" ");
@@ -76,7 +73,7 @@ public class SignUpController extends SignInController {
                     invalidLoginField.setText("Пользователь с таким именем уже существует");
                     invalidLoginField.setVisible(true);
                 } else if (response.equals("User is registered")) {
-                    loadScene(stage, Config.getPathToViews()+"successful-sign-up-view.fxml");
+                    loadScene(stage, Config.getPathToViews() + "successful-sign-up-view.fxml");
                 }
             } catch (Exception e) {
                 logger.error("Scene configuration file not found. " + e.getMessage());

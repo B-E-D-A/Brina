@@ -17,13 +17,13 @@
         <opaqueInsets>
             <Insets left="10.0"/>
         </opaqueInsets>
-        <Text fx:id="documentName" fill="#101d2f" strokeType="OUTSIDE" strokeWidth="0.0"
-              style="-fx-text-fill: #101d2f; -fx-padding: 10px;" text="  Название документа">
+        <Text fx:id="documentName" fill="#434c55ff" strokeType="OUTSIDE" strokeWidth="0.0"
+              style="-fx-text-fill: #434c55ff; -fx-padding: 10px;" text="  Название документа">
         </Text>
     </HBox>
     <Separator orientation="VERTICAL" prefHeight="55.0" prefWidth="5.0"/>
     <HBox alignment="CENTER" layoutX="574.0" layoutY="10.0" prefHeight="55.0" prefWidth="80" minWidth="70">
-        <Text fx:id="accessText" fill="#101d2f" text="writer">
+        <Text fx:id="accessText" fill="#434c55ff" text="writer">
         </Text>
     </HBox>
     <Separator orientation="VERTICAL" prefHeight="55.0" prefWidth="5.0"/>

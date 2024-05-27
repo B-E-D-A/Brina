@@ -1,8 +1,10 @@
+@import "colors.css";
+
 .file-button {
-    -fx-background-color: #101d2f;
-    -fx-text-fill: white;
+    -fx-background-color: -fx-dark-color;
+    -fx-text-fill: -fx-base-color;
     -fx-font-size: 14px;
-    -fx-border-color: #3d6dac;
+    -fx-border-color: black;
     -fx-border-width: 1px;
     -fx-background-radius: 8px;
     -fx-border-radius: 8px;
@@ -11,18 +13,19 @@
 }
 
 .login-field {
-    -fx-background-color: white;
-    -fx-text-fill: grey;
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-dark-color;
     -fx-font-size: 14px;
-    -fx-border-color: grey;
+    -fx-border-color: -fx-dark-color;
     -fx-border-width: 1px;
     -fx-background-radius: 8px;
     -fx-border-radius: 8px;
     -fx-font-family: "Montserrat";
+    -fx-prompt-text-fill: -fx-dark-color;
 }
 
-.hbox{
-    -fx-background-image: url(/org/hse/brina/assets/brina-background.png);
+.hbox {
+    -fx-background-image: url(/org/hse/brina/assets/main-page.png);
     -fx-background-size: contain;
     -fx-background-repeat: no-repeat;
     -fx-background-position: left center;
@@ -33,30 +36,103 @@
 }
 
 .list-cell:hover {
-    -fx-background-color: #acc6ea;
+    -fx-background-color: -fx-primary-color;
 }
 
 .list-view {
-    -fx-background-color: white;
-    -fx-text-fill: black;
+    -fx-background-color: -fx-base-color;
+    -fx-text-fill: -fx-dark-color;
 }
 
 .back {
-    -fx-background-color: white;
+    -fx-background-color: transparent;
     -fx-background-image: url(/org/hse/brina/richtext/back.png);
-    -fx-background-size: cover;
-    -fx-background-position: center;
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+
 }
 
 .log-out {
-    -fx-background-color: white;
-    -fx-text-fill: #3d6dac;
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-primary-color;
     -fx-font-size: 14px;
-    -fx-border-color: #3d6dac;
+    -fx-border-color: transparent;
     -fx-border-width: 1px;
     -fx-background-radius: 8px;
     -fx-border-radius: 8px;
     margin: 10px;
     -fx-font-family: "Montserrat";
     -fx-font-weight: bold;
+}
+
+.simple-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: -fx-dark-color;
+    -fx-font-family: "Montserrat";
+}
+
+
+.background-simple {
+    -fx-background-image: url(/org/hse/brina/assets/simple-background.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+
+.background-collab {
+    -fx-background-color: -fx-base-color;
+    -fx-background-image: url(/org/hse/brina/assets/colloboration-page.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+}
+
+.yandex {
+    -fx-font-size: 14px;
+    -fx-text-fill: -fx-dark-color;
+    -fx-alignment: center;
+    -fx-border-color: rgba(67, 76, 85, 0.5);
+    -fx-background-color: transparent;
+    -fx-font-family: "Montserrat";
+    -fx-border-width: 1px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+}
+
+.yandex .content {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.audio-button {
+    -fx-background-color: -fx-base-color;
+    -fx-text-fill: -fx-secondary-color;
+    -fx-font-size: 14px;
+    -fx-border-color: rgba(67, 76, 85, 0.5);
+    -fx-border-width: 1px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-margin-right: 10px;
+    -fx-font-family: "Montserrat";
+}
+
+.recognize-button {
+    -fx-background-color: -fx-secondary-color;
+    -fx-text-fill: -fx-base-color;
+    -fx-font-size: 14px;
+    -fx-border-color: rgba(67, 76, 85, 0.5);
+    -fx-border-width: 1px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-margin-right: 10px;
+    -fx-font-family: "Montserrat";
+}
+
+.send-button {
+    -fx-background-image: url(/org/hse/brina/assets/send.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-background-color: transparent;
 }

@@ -4,26 +4,30 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: white; -fx-padding: 10"
-      stylesheets="@../css/sign-in-page-style.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
-      fx:controller="org.hse.brina.utils.AudioRecognitionController">
-    <VBox fx:id="textVBox" alignment="CENTER" spacing="10" style="-fx-background-color: white; -fx-padding: 10">
-        <HBox fx:id="audioHBox" alignment="CENTER" maxHeight="50" spacing="10" styleClass="white-box">
+<?import javafx.geometry.Insets?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" styleClass="background-simple"
+      stylesheets="@../css/main-page-style.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
+      fx:controller="org.hse.brina.utils.AudioRecognitionController" spacing="10">
+    <VBox fx:id="textVBox" alignment="CENTER" spacing="10" style="-fx-background-color: transparent; -fx-spacing: 10" maxHeight="100">
+        <HBox fx:id="audioHBox" alignment="CENTER" maxHeight="50" spacing="10" style="-fx-background-color: transparent">
             <Text styleClass="simple-text" text="Аудио:"/>
             <Text fx:id="audioName" styleClass="simple-text"/>
         </HBox>
-        <HBox alignment="CENTER" maxHeight="50" spacing="10" styleClass="white-box">
-            <Button fx:id="loadAudio" onAction="#loadAudio" styleClass="access-button" text="Загрузить"/>
-            <Button fx:id="recordAudioButton" onAction="#recordAudio" styleClass="access-button" text="Записать"/>
-            <Button fx:id="speechRecognitionButton" onAction="#recognizeSpeech" styleClass="dark-button"
+        <HBox alignment="CENTER" maxHeight="50" spacing="10" style="-fx-background-color: transparent">
+            <Button fx:id="loadAudio" onAction="#loadAudio" styleClass="audio-button" text="Загрузить"/>
+            <Button fx:id="recordAudioButton" onAction="#recordAudio" styleClass="audio-button" text="Записать"/>
+            <Button fx:id="speechRecognitionButton" onAction="#recognizeSpeech" styleClass="recognize-button"
                     text="Распознать в текст"/>
         </HBox>
     </VBox>
-    <VBox spacing="10" style="-fx-background-color: white">
+    <VBox spacing="10" style="-fx-background-color: transparent">
         <TextArea fx:id="resultArea"
-                  style="-fx-background-color: white; -fx-border-color: #101d2f; -fx-border-width: 1px; -fx-border-radius: 8px"/>
-        <HBox fx:id="pasteHBox" alignment="CENTER_RIGHT" maxHeight="50" spacing="10" styleClass="white-box">
-            <Button fx:id="Paste" onAction="#pasteResult" styleClass="dark-button" text="Вставить"/>
+                  style="-fx-background-color: transparent; -fx-border-color: rgba(67, 76, 85, 0.5); -fx-border-width: 1px; -fx-border-radius: 8px"/>
+        <HBox fx:id="pasteHBox" alignment="CENTER_RIGHT" maxHeight="50" spacing="10" style="-fx-background-color: transparent">
+            <Button fx:id="Paste" onAction="#pasteResult" styleClass="recognize-button" text="Вставить"/>
         </HBox>
     </VBox>
+    <padding>
+        <Insets left="20" right="20" top="20" bottom="20"/>
+    </padding>
 </VBox>

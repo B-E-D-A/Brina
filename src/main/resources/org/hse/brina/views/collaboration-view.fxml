@@ -4,16 +4,20 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="globalVBox" style="-fx-background-color: white"
+<?import javafx.geometry.Insets?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="globalVBox" styleClass="background-collab"
       stylesheets="@../css/main-page-style.css" xmlns="http://javafx.com/javafx/17.0.2-ea"
       fx:controller="org.hse.brina.utils.CollaborationController">
     <Button fx:id="backButton" alignment="TOP_LEFT" onAction="#backButtonClicked" prefHeight="25" prefWidth="25"
             styleClass="back"/>
     <VBox fx:id="IDVBox" alignment="CENTER">
         <HBox alignment="CENTER" spacing="10">
-            <TextField fx:id="EnterIdField" prefHeight="50" prefWidth="200" styleClass="login-field"/>
-            <Button fx:id="Enter" onAction="#openEnterButton" styleClass="file-button" text="Введите ID">
+            <TextField fx:id="EnterIdField" prefHeight="40" prefWidth="180" styleClass="login-field"/>
+            <Button fx:id="Enter" onAction="#openEnterButton" styleClass="file-button" text="Ввести ID">
             </Button>
+            <padding>
+                <Insets top="-30"/>
+            </padding>
         </HBox>
     </VBox>
 </VBox>
