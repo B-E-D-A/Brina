@@ -9,6 +9,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Класс Connector отвечает за установление соединения с базой данных SQLite
+ * и создание необходимых таблиц.
+ */
+
 public class Connector {
     private static final Logger logger = LogManager.getLogger();
 
@@ -36,6 +41,11 @@ public class Connector {
                     "lock INTEGER" +
                     ")";
             statement.executeUpdate(sql);
+            sql = "CREATE TABLE IF NOT EXISTS friends (" +
+                    "username TEXT NOT NULL," +
+                    "friend TEXT NOT NULL" +
+                    ")";
+            statement.executeUpdate(sql);
             logger.info("Tables has been created");
         } catch (SQLException e) {
             logger.error(e.getMessage());
@@ -49,6 +59,7 @@ public class Connector {
             }
         }
     }
+
     public static void main(String[] args) {
         connect();
     }

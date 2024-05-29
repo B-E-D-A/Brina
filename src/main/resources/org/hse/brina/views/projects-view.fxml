@@ -34,6 +34,9 @@
                       textAlignment="RIGHT"/>
             </HBox>
         </HBox>
+        <padding>
+            <Insets left="10" right="10" bottom="10" top="10"/>
+        </padding>
     </HBox>
     <Separator prefWidth="200.0"/>
     <VBox fx:id="documentVBox">

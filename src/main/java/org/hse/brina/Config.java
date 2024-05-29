@@ -16,14 +16,15 @@ public class Config {
     private static final Logger logger = LogManager.getLogger();
 
     public static Client client = new Client("localhost", 8080);
-    private static final String projectPath= "projectPath";
-    private static final String pathToDB= "pathToDB";
-    private static final String defaultHeight= "defaultHeight";
-    private static final String defaultWidth= "defaultWidth";
-    private static final String pathToViews= "/org/hse/brina/views/";
-    private static final String pathToAssets= "/org/hse/brina/assets/";
-    private static final String pathToCss= "/org/hse/brina/css/";
+    private static final String projectPath = "projectPath";
+    private static final String pathToDB = "pathToDB";
+    private static final String defaultHeight = "defaultHeight";
+    private static final String defaultWidth = "defaultWidth";
+    private static final String pathToViews = "/org/hse/brina/views/";
+    private static final String pathToAssets = "/org/hse/brina/assets/";
+    private static final String pathToCss = "/org/hse/brina/css/";
     private static final int appNameLength = 5;
+    public static StringBuilder oldScene = new StringBuilder();
 
 
     static {
@@ -54,12 +55,15 @@ public class Config {
     public static String getProjectPath() {
         return properties.getProperty(projectPath);
     }
+
     public static String getPathToViews() {
         return pathToViews;
     }
+
     public static String getPathToAssets() {
         return pathToAssets;
     }
+
     public static String getPathToCss() {
         return pathToCss;
     }

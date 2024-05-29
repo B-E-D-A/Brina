@@ -9,6 +9,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+/**
+ * Класс Client представляет собой клиент для сетевого взаимодействия с сервером приложения.
+ */
+
 public class Client {
     private static final Logger logger = LogManager.getLogger();
     private Socket socket;
@@ -26,14 +30,6 @@ public class Client {
         } catch (IOException e) {
             logger.error(e.getMessage());
         }
-    }
-
-    public static void main(String[] args) {
-        Client client = new Client("localhost", 8080);
-        client.sendMessage("addUser B-E-D-A 1337");
-        String response = client.receiveMessage();
-        logger.info("Server response: " + response);
-        client.stop();
     }
 
     public void sendMessage(String message) {

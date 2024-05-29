@@ -70,7 +70,7 @@ public class RichTextDemo extends Application {
     private final StringBuilder documentId = new StringBuilder();
     public String previousView = Config.getPathToViews() + "main-window-view.fxml";
     public Stage mainStage;
-    private TextField documentNameField = new TextField();
+    public TextField documentNameField = new TextField();
     private Scene mainScene;
 
     {
@@ -318,7 +318,11 @@ public class RichTextDemo extends Application {
 
         TextField documentName = new TextField();
         documentName.setText("Новый документ");
-        documentNameField = documentName;
+        if (documentNameField.getText().isEmpty()) {
+            documentNameField = documentName;
+        } else {
+            documentName = documentNameField;
+        }
         documentName.setStyle("-fx-font-size: 12px;");
         documentName.setMaxWidth(200);
         documentName.setMaxHeight(50);
@@ -335,7 +339,8 @@ public class RichTextDemo extends Application {
         HBox documentNameHBox = new HBox();
         Button shareButton = new Button();
         shareButton.setText("Поделиться");
-        shareButton.setOnAction(e -> showPopupWindow(primaryStage, documentName));
+        TextField finalDocumentName = documentName;
+        shareButton.setOnAction(e -> showPopupWindow(primaryStage, finalDocumentName));
         shareButton.setAlignment(Pos.TOP_RIGHT);
         shareButton.setStyle("-fx-background-color: #97bd89ff; -fx-text-fill: white; -fx-font-size: 13px; fx-border-color: rgba(67, 76, 85, 0.5); -fx-border-width: 1px; -fx-background-radius: 8px; -fx-border-radius: 8px; -fx-margin-right: 10px; -fx-font-family: \"Montserrat\";");
         documentNameHBox.setStyle("-fx-spacing: 10");
@@ -372,17 +377,17 @@ public class RichTextDemo extends Application {
 
         ContextMenu contextMenu = area.getContextMenu();
         contextMenu.getItems().clear();
-        MenuItem firstOption = new MenuItem("Rewrite text in a formal style");
+        MenuItem firstOption = new MenuItem("Переписать текст в формальном стиле");
         firstOption.setOnAction(e -> {
-            showResponse("Rewrite text in a formal style");
+            showResponse("Переписать текст в формальном стиле");
         });
-        MenuItem secondOption = new MenuItem("Correct grammatical errors and spelling mistakes");
+        MenuItem secondOption = new MenuItem("Исправить ошибки");
         secondOption.setOnAction(e -> {
             showResponse("Иправь все ошибки и опечатки и пришли исправленный текст");
         });
-        MenuItem thirdOption = new MenuItem("Make the text more concise");
+        MenuItem thirdOption = new MenuItem("Сократить");
         thirdOption.setOnAction(e -> {
-            showResponse("Make the text more concise");
+            showResponse("Сделай текст более кратким");
         });
         MenuItem fourthOption = new MenuItem("Translate text into...");
         contextMenu.getItems().addAll(firstOption, secondOption, thirdOption);
@@ -469,9 +474,12 @@ public class RichTextDemo extends Application {
     }
 
     private void showResponse(String option) {
-        String text = area.getSelectedText();
+        logger.info(area.getSelectedText());
+        String text = area.getSelectedText().replace("\n", " ");
+        logger.info(text);
         try {
-            String textGPT = GPTServer.getGPTProcessing(option, text);
+            String gptResponse = GPTServer.getGPTProcessing(option + ", не используй в своем ответе жирные шрифты, курсивы и любые изменения текста", text);
+            String textGPT = gptResponse.replace("\\n", "\n").replace("**", "").replace("*", "");
             Stage GPTPopupStage = new Stage();
             GPTPopupStage.initOwner(mainStage);
             GPTPopupStage.initModality(Modality.NONE);

@@ -44,14 +44,19 @@ public class CollaborationController {
     public VBox globalVBox;
     @FXML
     public VBox IDVBox;
+    public Button friendsButton;
 
 
     private void loadScene(Stage stage, String fxmlView) throws IOException {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlView));
         Parent logInLoader = loader.load();
+        if(fxmlView.equals(Config.getPathToViews()+"friends-view.fxml")){
+            Config.oldScene.replace(0, Config.oldScene.length(),"collaboration-window");
+        }
         Scene scene = new Scene(logInLoader, stage.getScene().getWidth(), stage.getScene().getHeight());
         stage.setScene(scene);
     }
+
 
     @FXML
     private void openEnterButton() {
@@ -123,4 +128,14 @@ public class CollaborationController {
         HBox.setHgrow(IDVBox, Priority.ALWAYS);
         VBox.setVgrow(IDVBox, Priority.ALWAYS);
     }
+
+    public void friendsButtonClicked(ActionEvent actionEvent) {
+        Stage stage = (Stage) friendsButton.getScene().getWindow();
+        try {
+            loadScene(stage, Config.getPathToViews() + "friends-view.fxml");
+        } catch (IOException e) {
+            logger.error("Scene configuration file not found. " + e.getMessage());
+        }
+    }
+
 }

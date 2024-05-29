@@ -3,6 +3,7 @@ package org.hse.brina.server;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hse.brina.Config;
+import org.python.antlr.ast.Str;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,9 +12,12 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.*;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
+/**
+ * Класс Server - сервер, который прослушивает подключения клиентов и обрабатывает их запросы,
+ * поддерживает подключение к базе данных для хранения и извлечения пользовательской информации.
+ */
 
 public class Server {
     private static final Logger logger = LogManager.getLogger();
@@ -51,7 +55,7 @@ public class Server {
         }
     }
 
-    private class ClientHandler implements Runnable {
+    class ClientHandler implements Runnable {
         private Socket clientSocket;
         private BufferedReader in;
         private PrintWriter out;
@@ -69,126 +73,29 @@ public class Server {
                 String inputLine;
                 while ((inputLine = in.readLine()) != null) {
                     if (inputLine.startsWith("signInUser")) {
-                        String[] userData = inputLine.split(" ");
-                        if (userData.length == 3) {
-                            String username = userData[1];
-                            String password = userData[2];
-                            boolean isUserExist = checkIsUserRegistered(username);
-                            if (!isUserExist) {
-                                out.println("User with this name not found");
-                            } else {
-                                boolean isPasswordCorrect = checkPassword(username, password);
-                                if (isPasswordCorrect) {
-                                    out.println("User logged in");
-                                } else {
-                                    out.println("Wrong password");
-                                }
-                            }
-
-                        } else {
-                            out.println("Invalid command format");
-                        }
+                        performSignIn(inputLine);
                     } else if (inputLine.startsWith("addUser")) {
-                        String[] userData = inputLine.split(" ");
-                        if (userData.length == 3) {
-                            String username = userData[1];
-                            String password = userData[2];
-                            addUser(username, password, Integer.toString(password.hashCode()));
-                            out.println("New user added");
-                        } else {
-                            out.println("Invalid command format");
-                        }
+                        performAddUser(inputLine);
                     } else if (inputLine.startsWith("signUpUser")) {
-                        String[] userData = inputLine.split(" ");
-                        if (userData.length == 4) {
-                            String username = userData[1];
-                            String password = userData[2];
-                            String passwordSalt = userData[3];
-                            boolean isUserExist = checkIsUserRegistered(username);
-                            if (isUserExist) {
-                                out.println("User with the same name already exists");
-                            } else {
-                                addUser(username, password, passwordSalt);
-                                out.println("User is registered");
-                            }
-                        } else {
-                            out.println("Invalid command format");
-                        }
+                        performSignUp(inputLine);
                     } else if (inputLine.startsWith("getDocuments")) {
-                        String[] userData = inputLine.split(" ");
-                        if (userData.length == 2) {
-                            String username = userData[1];
-                            Map<String, String> userDocuments = getUserDocuments(username);
-                            StringBuilder stringBuilder = new StringBuilder();
-                            for (Map.Entry<String, String> entry : userDocuments.entrySet()) {
-                                stringBuilder.append(entry.getKey()).append(" ").append(entry.getValue()).append(" ");
-                            }
-                            out.println(stringBuilder.toString().trim());
-                        } else {
-                            out.println("Invalid command format");
-                        }
+                        performGetDocuments(inputLine);
                     } else if (inputLine.startsWith("saveDocument")) {
-                        String[] userData = inputLine.split(" ");
-                        if (userData.length == 4) {
-                            String filename = userData[1];
-                            String username = userData[2];
-                            String name = userData[3];
-                            addDocument(filename, username, name);
-                            out.println("Document saved");
-                        } else {
-                            out.println("Invalid command format");
-                        }
+                        performSaveDocument(inputLine);
                     } else if (inputLine.startsWith("openDocumentById")) {
-                        String[] userData = inputLine.split(" ");
-                        if (userData.length == 3) {
-                            String username = userData[1];
-                            int fileId = Integer.parseInt(userData[2]);
-                            String response = checkAndUpdateFileLock(username, fileId);
-                            out.println(response);
-                        } else {
-                            out.println("Invalid command format");
-                        }
+                        performOpenDocumentById(inputLine);
                     } else if (inputLine.startsWith("addDocumentById")) {
-                        String[] userData = inputLine.split(" ");
-                        if (userData.length == 4) {
-                            String username = userData[1];
-                            String filename = userData[2];
-                            String access = userData[3];
-                            saveDocumentById(username, filename, access);
-                        } else {
-                            out.println("Invalid command format");
-                        }
+                        performAddDocumentById(inputLine);
                     } else if (inputLine.startsWith("unlockDocument")) {
-                        String[] userData = inputLine.split(" ");
-                        if (userData.length == 2) {
-                            int documentId = userData[1].hashCode();
-                            setLockStatus(documentId, 0);
-                        } else {
-                            out.println("Invalid command format");
-                        }
+                        performUnlockDocument(inputLine);
                     } else if (inputLine.startsWith("lockDocument")) {
-                        String[] userData = inputLine.split(" ");
-                        if (userData.length == 2) {
-                            String documentId = userData[1];
-                            if (getLockStatus(Integer.parseInt(documentId)) == 1) {
-                                out.println("Document closed");
-                            } else {
-                                out.println("Document locked");
-                            }
-                            setLockStatus(Integer.parseInt(documentId), 1);
-                        } else {
-                            out.println("Invalid command format");
-                        }
+                        performLockDocument(inputLine);
                     } else if (inputLine.startsWith("getLock")) {
-                        String[] userData = inputLine.split(" ");
-                        if (userData.length == 2) {
-                            String documentName = userData[1];
-                            String[] filename = documentName.split("\\.");
-                            int lockStatus = getLockStatus(filename[0].hashCode());
-                            out.println(lockStatus);
-                        } else {
-                            out.println("Invalid command format");
-                        }
+                        performGetLock(inputLine);
+                    } else if (inputLine.startsWith("addFriend")) {
+                        performAddFriend(inputLine);
+                    } else if (inputLine.startsWith("getFriendsList")) {
+                        performGetFriendsList(inputLine);
                     } else {
                         out.println("Unknown command");
                     }
@@ -206,7 +113,214 @@ public class Server {
             }
         }
 
-        private void addUser(String username, String password, String passwordSalt) {
+        private void performSignIn(String inputLine) {
+            String[] userData = inputLine.split(" ");
+            if (userData.length == 3) {
+                String username = userData[1];
+                String password = userData[2];
+                boolean isUserExist = checkIsUserRegistered(username);
+                if (!isUserExist) {
+                    out.println("User with this name not found");
+                } else {
+                    boolean isPasswordCorrect = checkPassword(username, password);
+                    if (isPasswordCorrect) {
+                        out.println("User logged in");
+                    } else {
+                        out.println("Wrong password");
+                    }
+                }
+
+            } else {
+                out.println("Invalid command format");
+            }
+        }
+
+        private void performAddUser(String inputLine) {
+            String[] userData = inputLine.split(" ");
+            if (userData.length == 3) {
+                String username = userData[1];
+                String password = userData[2];
+                addUser(username, password, Integer.toString(password.hashCode()));
+                out.println("New user added");
+            } else {
+                out.println("Invalid command format");
+            }
+        }
+
+        private void performSignUp(String inputLine) {
+            String[] userData = inputLine.split(" ");
+            if (userData.length == 4) {
+                String username = userData[1];
+                String password = userData[2];
+                String passwordSalt = userData[3];
+                boolean isUserExist = checkIsUserRegistered(username);
+                if (isUserExist) {
+                    out.println("User with the same name already exists");
+                } else {
+                    addUser(username, password, passwordSalt);
+                    out.println("User is registered");
+                }
+            } else {
+                out.println("Invalid command format");
+            }
+        }
+
+        private void performGetDocuments(String inputLine) {
+            String[] userData = inputLine.split(" ");
+            if (userData.length == 2) {
+                String username = userData[1];
+                Map<String, String> userDocuments = getUserDocuments(username);
+                StringBuilder stringBuilder = new StringBuilder();
+                for (Map.Entry<String, String> entry : userDocuments.entrySet()) {
+                    stringBuilder.append(entry.getKey()).append(" ").append(entry.getValue()).append(" ");
+                }
+                out.println(stringBuilder.toString().trim());
+            } else {
+                out.println("Invalid command format");
+            }
+        }
+
+        private void performSaveDocument(String inputLine) {
+            String[] userData = inputLine.split(" ");
+            if (userData.length == 4) {
+                String filename = userData[1];
+                String username = userData[2];
+                String name = userData[3];
+                addDocument(filename, username, name, 0);
+                out.println("Document saved");
+            } else {
+                out.println("Invalid command format");
+            }
+        }
+
+        public void performOpenDocumentById(String inputLine) {
+            String[] userData = inputLine.split(" ");
+            if (userData.length == 3) {
+                String username = userData[1];
+                int fileId = Integer.parseInt(userData[2]);
+                String response = checkAndUpdateFileLock(username, fileId);
+                out.println(response);
+            } else {
+                out.println("Invalid command format");
+            }
+        }
+
+        private void performAddDocumentById(String inputLine) {
+            String[] userData = inputLine.split(" ");
+            if (userData.length == 4) {
+                String username = userData[1];
+                String filename = userData[2];
+                String access = userData[3];
+                saveDocumentById(username, filename, access);
+            } else {
+                out.println("Invalid command format");
+            }
+        }
+
+        private void performUnlockDocument(String inputLine) {
+            String[] userData = inputLine.split(" ");
+            if (userData.length == 2) {
+                int documentId = userData[1].hashCode();
+                setLockStatus(documentId, 0);
+            } else {
+                out.println("Invalid command format");
+            }
+        }
+
+        private void performLockDocument(String inputLine) {
+            String[] userData = inputLine.split(" ");
+            if (userData.length == 2) {
+                String documentId = userData[1];
+                if (getLockStatus(Integer.parseInt(documentId)) == 1) {
+                    out.println("Document closed");
+                } else {
+                    out.println("Document locked");
+                }
+                setLockStatus(Integer.parseInt(documentId), 1);
+            } else {
+                out.println("Invalid command format");
+            }
+        }
+
+        private void performGetLock(String inputLine) {
+            String[] userData = inputLine.split(" ");
+            if (userData.length == 2) {
+                String documentName = userData[1];
+                String[] filename = documentName.split("\\.");
+                int lockStatus = getLockStatus(filename[0].hashCode());
+                out.println(lockStatus);
+            } else {
+                out.println("Invalid command format");
+            }
+        }
+
+        private void performAddFriend(String inputLine) {
+            String[] userData = inputLine.split(" ");
+            if (userData.length == 3) {
+                String username = userData[1];
+                String friendName = userData[2];
+
+                if (checkIsUserRegistered(friendName)) {
+                    addFriend(username, friendName);
+                    addFriend(friendName, username);
+                    out.println("Friend added successfully");
+                } else {
+                    out.println("User " + friendName + " not found");
+                }
+            } else {
+                out.println("Invalid command format");
+            }
+        }
+
+        private void performGetFriendsList(String inputLine) {
+            String[] userData = inputLine.split(" ");
+            if (userData.length == 2) {
+                String username = userData[1];
+                String friendsList = getFriendsList(username);
+
+                if (friendsList.isEmpty()) {
+                    out.println("No friends found");
+                } else {
+                    out.println(friendsList);
+                }
+            } else {
+                out.println("Invalid command format");
+            }
+        }
+
+        private String getFriendsList(String username) {
+            StringBuilder friends = new StringBuilder();
+            String sql = "SELECT friend FROM friends WHERE username = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, username);
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()) {
+                    if (!friends.isEmpty()) {
+                        friends.append(" ");
+                    }
+                    friends.append(resultSet.getString("friend"));
+                }
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+            }
+
+            return friends.toString();
+        }
+
+
+        private void addFriend(String username, String friendName) {
+            String sql = "INSERT INTO friends (username, friend) VALUES (?, ?)";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, username);
+                statement.setString(2, friendName);
+                statement.executeUpdate();
+            } catch (SQLException e) {
+                logger.error(e.getMessage());
+            }
+        }
+
+        void addUser(String username, String password, String passwordSalt) {
             String sql = "INSERT INTO users (username, password, password_salt) VALUES (?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, username);
@@ -219,7 +333,7 @@ public class Server {
             }
         }
 
-        private void addDocument(String filename, String username, String name) {
+        private void addDocument(String filename, String username, String name, int m_lock) {
             String sql = "INSERT INTO user_documents (username, filename, file_path, file_id, access, lock) VALUES (?, ?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, username);
@@ -227,7 +341,7 @@ public class Server {
                 statement.setString(3, Config.getProjectPath().substring(0, Config.getProjectPath().length() - Config.getAppNameLength()) + "documents/" + filename);
                 statement.setInt(4, Math.abs(name.hashCode()));
                 statement.setString(5, "w");
-                statement.setInt(6, 0);
+                statement.setInt(6, m_lock);
                 statement.executeUpdate();
                 logger.info("Document added into db");
             } catch (SQLException e) {
@@ -244,7 +358,7 @@ public class Server {
                 statement.setString(3, Config.getProjectPath().substring(0, Config.getProjectPath().length() - Config.getAppNameLength()) + "documents/" + documentName);
                 statement.setInt(4, Math.abs(filename.hashCode()));
                 statement.setString(5, access);
-                statement.setInt(6, 0);
+                statement.setInt(6, 1);
                 statement.executeUpdate();
                 logger.info(documentName + " added into db for " + username);
             } catch (SQLException e) {
@@ -277,7 +391,7 @@ public class Server {
             return "No such file";
         }
 
-        private boolean checkPassword(String username, String password) {
+        boolean checkPassword(String username, String password) {
             String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, username);

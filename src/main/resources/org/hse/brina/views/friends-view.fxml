@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="globalVBox" alignment="TOP_CENTER" maxWidth="Infinity" spacing="10"
+      styleClass="background-simple" stylesheets="@../css/main-page-style.css"
+      xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="org.hse.brina.utils.FriendsController">
+    <HBox fx:id="gHBox" maxWidth="Infinity" spacing="10">
+        <HBox fx:id="labelsHBox" alignment="CENTER" maxWidth="Infinity" prefHeight="35.0" style="-fx-spacing: 10;">
+            <opaqueInsets>
+                <Insets top="10.0"/>
+            </opaqueInsets>
+            <HBox alignment="CENTER" prefWidth="45" spacing="10">
+                <Button fx:id="backButton" alignment="TOP_LEFT" onAction="#backButtonClicked" prefHeight="35"
+                        prefWidth="35" styleClass="back">
+                </Button>
+                <Button fx:id="addFriendButton" alignment="TOP_LEFT" onAction="#addFriend" prefHeight="35"
+                        prefWidth="35" styleClass="recognize-button" text="Добавить друга">
+                </Button>
+                <padding>
+                    <Insets left="10.0"/>
+                </padding>
+            </HBox>
+            <HBox alignment="CENTER" maxWidth="Infinity" prefWidth="400">
+                <Text fx:id="heading" styleClass="simple-text" text="Мои друзья"
+                      textAlignment="CENTER"/>
+            </HBox>
+            <HBox alignment="CENTER" minWidth="70" prefHeight="35.0" prefWidth="100.0" maxWidth="Infinity">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="simple-text" text="Читатель"/>
+            </HBox>
+            <HBox alignment="CENTER" minWidth="70" prefHeight="35.0" prefWidth="100.0" maxWidth="Infinity">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0"
+                      styleClass="simple-text" text="Редактор"
+                      textAlignment="RIGHT"/>
+            </HBox>
+            <HBox alignment="CENTER" prefWidth="45" spacing="10">
+                <Button fx:id="continueButton" alignment="TOP_LEFT" onAction="#continueCollabing" prefHeight="35"
+                        prefWidth="35" styleClass="recognize-button" text="Далее">
+                </Button>
+                <padding>
+                    <Insets left="10.0"/>
+                </padding>
+            </HBox>
+        </HBox>
+        <padding>
+            <Insets left="10" right="10" bottom="10" top="10"/>
+        </padding>
+    </HBox>
+    <Separator prefWidth="200.0"/>
+    <VBox fx:id="friendsVBox">
+        <VBox fx:id="friendList">
+        </VBox>
+    </VBox>
+</VBox>

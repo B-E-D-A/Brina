@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<HBox fx:id="globalHBox" alignment="CENTER" maxHeight="40.0" prefHeight="40.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.hse.brina.utils.FriendListItemController">
+    <opaqueInsets>
+        <Insets bottom="10" left="10" right="10" top="10" />
+    </opaqueInsets>
+    <HBox fx:id="nameHBox" alignment="CENTER_LEFT" maxWidth="Infinity" prefHeight="55.0" prefWidth="550.0">
+        <opaqueInsets>
+            <Insets left="10.0" />
+        </opaqueInsets>
+        <Text fx:id="friendName" fill="#434c55ff" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-fill: #434c55ff; -fx-padding: 10px;" text="  Имя друга">
+        </Text>
+    </HBox>
+    <Separator fx:id="sep1" orientation="VERTICAL" prefHeight="55.0" prefWidth="5.0" />
+    <HBox alignment="CENTER">
+        <CheckBox fx:id="readerAccessCheckBox"/>
+        <padding>
+            <Insets bottom="10" top="10" right="10" left="10"/>
+        </padding>
+    </HBox>
+    <Separator fx:id="sep2" orientation="VERTICAL" prefHeight="55.0" prefWidth="5.0" />
+    <HBox alignment="CENTER">
+        <CheckBox fx:id="writerAccessCheckBox"/>
+        <padding>
+            <Insets bottom="10" top="10" right="10" left="10"/>
+        </padding>
+    </HBox>
+</HBox>

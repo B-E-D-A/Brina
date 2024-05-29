@@ -11,6 +11,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hse.brina.yandexGPT.server.GPTServer;
 
+/**
+ * Класс YandexGptController обрабатывает вводимые пользователем данные и ответ Yandex GPT.
+ */
+
 public class YandexGptController {
     private static final Logger logger = LogManager.getLogger();
     @FXML
@@ -41,7 +45,8 @@ public class YandexGptController {
     public void sendButtonClicked() {
         try {
             if (!userTextArea.getText().isEmpty()) {
-                String gptResult = GPTServer.getGPTProcessing("Ответь на вопрос ", userTextArea.getText());
+                String gptResponse = GPTServer.getGPTProcessing("Ответь на вопрос, не используй жирные шрифты, курсивы и любые изменения шрифта ", userTextArea.getText());
+                String gptResult = gptResponse.replace("\\n", "\n").replace("**", "").replace("*", "");
                 gptTextArea.setText(gptResult);
             }
         } catch (Exception e) {

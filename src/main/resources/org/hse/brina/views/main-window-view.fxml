@@ -27,6 +27,10 @@
                 <Button fx:id="my" prefWidth="180" prefHeight="27" styleClass="file-button" text="Мои документы"
                         onAction="#openMyProdButton"/>
             </HBox>
+            <HBox spacing="10">
+                <Button fx:id="friends" prefWidth="40" prefHeight="27" styleClass="friends-button" text="Друзья"
+                        onAction="#openFriendList"/>
+            </HBox>
             <HBox spacing="10" alignment="CENTER">
                 <Button fx:id="logOutButton" prefWidth="100" prefHeight="27" styleClass="log-out" text="Выйти"
                         onAction="#logOut"/>
@@ -34,5 +38,3 @@
         </VBox>
     </HBox>
 </StackPane>
-
-

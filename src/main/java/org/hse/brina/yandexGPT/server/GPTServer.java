@@ -18,7 +18,11 @@ public class GPTServer {
         String json = constructRequest(query, text);
         Dotenv dotenv = Dotenv.configure().directory("./.env").load();
         String apiKey = dotenv.get("GPT_API_KEY");
-        HttpRequest request = HttpRequest.newBuilder().uri(new URI("https://llm.api.cloud.yandex.net/foundationModels/v1/completion")).POST(HttpRequest.BodyPublishers.ofString(json)).header("Content-Type", "application/json").header("Authorization", "Api-key " + apiKey).build();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI("https://llm.api.cloud.yandex.net/foundationModels/v1/completion"))
+                .POST(HttpRequest.BodyPublishers.ofString(json)).header("Content-Type", "application/json")
+                .header("Authorization", "Api-key " + apiKey)
+                .build();
 
         HttpClient client = HttpClient.newHttpClient();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
