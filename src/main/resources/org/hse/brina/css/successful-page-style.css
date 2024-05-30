@@ -8,4 +8,5 @@ root {
     -fx-font-size: 22px;
     -fx-text-fill: -fx-dark-primary-color;
     -fx-font-family: "Montserrat";
+    -fx-background-color: -fx-base-color;
 }

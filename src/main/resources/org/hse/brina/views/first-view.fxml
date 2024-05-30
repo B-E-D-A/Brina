@@ -2,11 +2,10 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Button?>
 <VBox xmlns:fx="http://javafx.com/fxml"
       xmlns="http://javafx.com/javafx"
       fx:controller="org.hse.brina.utils.FirstViewController"
       alignment="CENTER"
       stylesheets="@../css/first-page-style.css">
-    <Label fx:id="text" styleClass="back"/>
+    <Label fx:id="text" styleClass="back-button"/>
 </VBox>

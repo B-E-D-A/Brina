@@ -6,6 +6,7 @@ package org.hse.brina.utils;
 public class Friend {
     private final StringBuilder name;
     private final StringBuilder access;
+
     public Friend(String access, String name) {
         this.access = new StringBuilder(access);
         this.name = new StringBuilder(name);

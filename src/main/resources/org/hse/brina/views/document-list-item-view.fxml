@@ -5,20 +5,16 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <HBox xmlns:fx="http://javafx.com/fxml/1" fx:id="globalHBox" alignment="CENTER_LEFT" maxHeight="40.0"
       prefHeight="40.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
       fx:controller="org.hse.brina.utils.DocumentListItemController">
-    <opaqueInsets>
-        <Insets bottom="10" left="10" right="10" top="10"/>
-    </opaqueInsets>
     <HBox fx:id="nameHBox" alignment="CENTER_LEFT" maxWidth="Infinity" prefHeight="55.0" prefWidth="550.0">
         <opaqueInsets>
             <Insets left="10.0"/>
         </opaqueInsets>
         <Text fx:id="documentName" fill="#434c55ff" strokeType="OUTSIDE" strokeWidth="0.0"
-              style="-fx-text-fill: #434c55ff; -fx-padding: 10px;" text="  Название документа">
+              style="-fx-text-fill: #434c55ff; -fx-padding: 10px;" text="Название документа">
         </Text>
     </HBox>
     <Separator orientation="VERTICAL" prefHeight="55.0" prefWidth="5.0"/>
@@ -34,4 +30,7 @@
             </ImageView>
         </VBox>
     </HBox>
+    <padding>
+        <Insets left="10"/>
+    </padding>
 </HBox>

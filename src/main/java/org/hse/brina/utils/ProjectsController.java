@@ -25,7 +25,7 @@ import java.util.*;
 /**
  * Класс ProjectsController отвечает за выгрузку документов пользователя,
  * управление представлением списка документов в приложении.
-*/
+ */
 
 public class ProjectsController implements Initializable {
     private static final Logger logger = LogManager.getLogger();
@@ -53,21 +53,21 @@ public class ProjectsController implements Initializable {
         HBox.setHgrow(gHBox, Priority.ALWAYS);
         List<Document> documents = new ArrayList<>(documents());
         for (Document document : documents) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(Config.getPathToViews()+"document-list-item-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(Config.getPathToViews() + "document-list-item-view.fxml"));
             try {
                 HBox documentHBox = loader.load();
                 DocumentListItemController controller = loader.getController();
                 controller.setData(document);
 
                 controller.nameHBox.setOnMouseClicked(event -> {
-                   String[] filename = controller.documentName.getText().split("\\.");
+                    String[] filename = controller.documentName.getText().split("\\.");
                     Config.client.sendMessage("lockDocument " + filename[0].hashCode());
                     String response = Config.client.receiveMessage();
                     String key = controller.documentName.getText();
-                    String value = userDocumentsMap.get(controller.accessText.getText().charAt(0)+key);
+                    String value = userDocumentsMap.get(controller.accessText.getText().charAt(0) + key);
                     if (!response.equals("Document closed") && key != null && value != null && !(Objects.equals(key, " ") || key.isEmpty()) && !(Objects.equals(value, " ") || value.isEmpty())) {
                         RichTextDemo richTextWindow = new RichTextDemo();
-                        richTextWindow.previousView = Config.getPathToViews()+"projects-view.fxml";
+                        richTextWindow.previousView = Config.getPathToViews() + "projects-view.fxml";
                         richTextWindow.start((Stage) documentList.getScene().getWindow());
                         File file = new File(value);
                         if (file.exists()) {
@@ -103,7 +103,7 @@ public class ProjectsController implements Initializable {
     public void backButtonClicked(ActionEvent actionEvent) {
         Stage stage = (Stage) backButton.getScene().getWindow();
         try {
-            loadScene(stage, Config.getPathToViews()+"main-window-view.fxml");
+            loadScene(stage, Config.getPathToViews() + "main-window-view.fxml");
         } catch (IOException e) {
             logger.error("Scene configuration file not found. " + e.getMessage());
         }

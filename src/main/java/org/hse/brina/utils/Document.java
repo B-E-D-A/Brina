@@ -9,7 +9,7 @@ import org.hse.brina.Config;
 
 public class Document {
     private final StringBuilder name;
-    private final StringBuilder image = new StringBuilder(Config.getPathToAssets()+"unlocked.png");
+    private final StringBuilder image = new StringBuilder(Config.getPathToAssets() + "unlocked.png");
     private final String access;
     private STATUS status;
 
@@ -48,7 +48,6 @@ public class Document {
     }
 
     public enum STATUS {
-        LOCKED,
-        UNLOCKED
+        LOCKED, UNLOCKED
     }
 }

@@ -95,7 +95,6 @@ public class RichTextDemo extends Application {
         Button backBtn = new Button();
         backBtn.getStyleClass().add("back");
         backBtn.setOnAction(e -> {
-            logger.info(documentNameField.getText());
             Config.client.sendMessage("unlockDocument " + documentNameField.getText());
             FXMLLoader loader = new FXMLLoader(Main.class.getResource(previousView));
             Parent pageLoader;
@@ -111,6 +110,7 @@ public class RichTextDemo extends Application {
         backBtn.setPrefWidth(25);
         backBtn.setPrefHeight(25);
         backBtn.setTooltip(new Tooltip("Back"));
+        backBtn.setAlignment(Pos.CENTER);
         Button undoBtn = createButton("undo", area::undo, "Undo");
         Button redoBtn = createButton("redo", area::redo, "Redo");
         Button cutBtn = createButton("cut", area::cut, "Cut");
@@ -328,7 +328,7 @@ public class RichTextDemo extends Application {
         documentName.setMaxHeight(50);
         documentName.setPrefHeight(30);
         documentName.setPrefWidth(150);
-        documentName.setAlignment(Pos.BASELINE_LEFT);
+        documentName.setAlignment(Pos.CENTER_LEFT);
         ToolBar toolBar1 = new ToolBar(loadBtn, saveBtn, new Separator(Orientation.VERTICAL), undoBtn, redoBtn, new Separator(Orientation.VERTICAL), cutBtn, copyBtn, pasteBtn, new Separator(Orientation.VERTICAL), boldBtn, italicBtn, underlineBtn, strikeBtn, new Separator(Orientation.VERTICAL), alignLeftBtn, alignCenterBtn, alignRightBtn, alignJustifyBtn, new Separator(Orientation.VERTICAL), increaseIndentBtn, decreaseIndentBtn, new Separator(Orientation.VERTICAL), insertImageBtn, new Separator(Orientation.VERTICAL), HBoxParagraphBackground);
 
         String toolBarStyle = "-fx-background-color:white; -fx-padding: 0px;";
@@ -337,6 +337,7 @@ public class RichTextDemo extends Application {
         toolBar1.setMaxHeight(30);
 
         HBox documentNameHBox = new HBox();
+        documentNameHBox.setPrefHeight(35);
         Button shareButton = new Button();
         shareButton.setText("Поделиться");
         TextField finalDocumentName = documentName;
@@ -344,6 +345,7 @@ public class RichTextDemo extends Application {
         shareButton.setAlignment(Pos.TOP_RIGHT);
         shareButton.setStyle("-fx-background-color: #97bd89ff; -fx-text-fill: white; -fx-font-size: 13px; fx-border-color: rgba(67, 76, 85, 0.5); -fx-border-width: 1px; -fx-background-radius: 8px; -fx-border-radius: 8px; -fx-margin-right: 10px; -fx-font-family: \"Montserrat\";");
         documentNameHBox.setStyle("-fx-spacing: 10");
+        documentNameHBox.setAlignment(Pos.CENTER_LEFT);
 
         HBox featuresHBox = new HBox();
         Button recordingButton = new Button();
@@ -474,9 +476,7 @@ public class RichTextDemo extends Application {
     }
 
     private void showResponse(String option) {
-        logger.info(area.getSelectedText());
         String text = area.getSelectedText().replace("\n", " ");
-        logger.info(text);
         try {
             String gptResponse = GPTServer.getGPTProcessing(option + ", не используй в своем ответе жирные шрифты, курсивы и любые изменения текста", text);
             String textGPT = gptResponse.replace("\\n", "\n").replace("**", "").replace("*", "");
@@ -798,7 +798,6 @@ public class RichTextDemo extends Application {
     }
 
     private void loadTXT(File file) {
-        logger.info("Loading TXT File");
         try (FileReader reader = new FileReader(file); BufferedReader bufferedReader = new BufferedReader(reader)) {
             StringBuilder content = new StringBuilder();
             String line;

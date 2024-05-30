@@ -134,7 +134,6 @@
     -fx-background-size: contain;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
-    -fx-padding: 25px;
 }
 
 .background-signup {
@@ -143,5 +142,4 @@
     -fx-background-size: contain;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
-    -fx-padding: 20px;
 }

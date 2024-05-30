@@ -109,10 +109,10 @@
     -fx-background-image: url(align-justify.png);
 }
 
-.microphone{
+.microphone {
     -fx-background-image: url(mic.png);
 }
 
-.yandex-gpt{
+.yandex-gpt {
     -fx-background-image: url(yandex-gpt.png);
 }

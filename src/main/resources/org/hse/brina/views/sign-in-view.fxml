@@ -12,9 +12,12 @@
       fx:controller="org.hse.brina.signin.SignInController">
 
     <HBox alignment="CENTER_RIGHT" prefHeight="400" prefWidth="600" styleClass="background-signin">
+        <padding>
+            <Insets right="30.0" top="40.0" bottom="30"/>
+        </padding>
         <VBox prefHeight="570" prefWidth="340">
             <padding>
-                <Insets bottom="24.0" left="20.0" right="20.0" top="24.0"/>
+                <Insets right="20.0" top="20.0" left="25" bottom="10"/>
             </padding>
             <HBox alignment="CENTER_LEFT" spacing="10">
                 <Label fx:id="welcomeText" style="-fx-font-size: 18" styleClass="label" text="Добро пожаловать в BRINA">

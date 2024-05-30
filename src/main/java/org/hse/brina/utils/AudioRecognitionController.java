@@ -24,14 +24,23 @@ import java.io.File;
 
 public class AudioRecognitionController {
     private static final Logger logger = LogManager.getLogger();
+    @FXML
     public Button loadAudio;
+    @FXML
     public Button speechRecognitionButton;
+    @FXML
     public TextArea resultArea;
+    @FXML
     public Button Paste;
+    @FXML
     public HBox pasteHBox;
+    @FXML
     public VBox textVBox;
+    @FXML
     public Text audioName;
+    @FXML
     public Button recordAudioButton;
+    @FXML
     public HBox audioHBox;
     public RichTextDemo.FoldableStyledArea documentArea;
     private StringBuilder path;

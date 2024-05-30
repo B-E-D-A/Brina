@@ -44,13 +44,12 @@
     -fx-text-fill: -fx-dark-color;
 }
 
-.back {
+.back-button {
     -fx-background-color: transparent;
     -fx-background-image: url(/org/hse/brina/richtext/back.png);
     -fx-background-size: contain;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
-
 }
 
 .log-out {
@@ -138,13 +137,30 @@
 }
 
 .friends-button {
-    -fx-background-color: -fx-secondary-color;
-    -fx-text-fill: -fx-base-color;
-    -fx-font-size: 14px;
-    -fx-border-color: rgba(67, 76, 85, 0.5);
+    -fx-background-color: -fx-primary-color;
+    -fx-background-image: url(/org/hse/brina/assets/friends.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-border-color: -fx-primary-color;
     -fx-border-width: 1px;
     -fx-background-radius: 8px;
     -fx-border-radius: 8px;
-    -fx-margin-right: 10px;
+    -fx-padding: 5px 5px;
+}
+
+.warning-text {
+    -fx-font-size: 12px;
+    -fx-text-fill: red;
+    -fx-background-color: blue;
     -fx-font-family: "Montserrat";
+}
+
+.add-friends-button {
+    -fx-background-color: transparent;
+    -fx-background-image: url(/org/hse/brina/assets/add-friend.png);
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-border-color: transparent;
 }

@@ -39,15 +39,15 @@ public class MainWindowController implements Initializable {
     @FXML
     private Button my;
 
-    private void openButton(Stage stage, String fxmlView) throws IOException {
+    private void loadScene(Stage stage, String fxmlView) throws IOException {
+        if (fxmlView.equals(Config.getPathToViews() + "friends-view.fxml")) {
+            Config.oldScene.replace(0, Config.oldScene.length(), Config.getPathToViews() + "main-window-view.fxml");
+        }
         FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlView));
         Parent sceneLoader = loader.load();
         Scene scene;
         if (!fxmlView.equals(Config.getPathToViews() + "sign-in-view.fxml")) {
             scene = new Scene(sceneLoader, stage.getScene().getWidth(), stage.getScene().getHeight());
-            if (fxmlView.equals(Config.getPathToViews() + "friends-view.fxml")) {
-                Config.oldScene.replace(0, Config.oldScene.length(), "main-window");
-            }
         } else {
             scene = new Scene(sceneLoader, Config.getDefaultWidth(), Config.getDefaultHeight());
         }
@@ -67,7 +67,7 @@ public class MainWindowController implements Initializable {
     private void openCollabButton() {
         Stage stage = (Stage) collab.getScene().getWindow();
         try {
-            openButton(stage, Config.getPathToViews() + "collaboration-view.fxml");
+            loadScene(stage, Config.getPathToViews() + "collaboration-view.fxml");
         } catch (IOException e) {
             logger.error("Scene configuration file not found. " + e.getMessage());
         }
@@ -77,7 +77,7 @@ public class MainWindowController implements Initializable {
     private void openMyProdButton() {
         Stage stage = (Stage) my.getScene().getWindow();
         try {
-            openButton(stage, Config.getPathToViews() + "projects-view.fxml");
+            loadScene(stage, Config.getPathToViews() + "projects-view.fxml");
         } catch (IOException e) {
             logger.error("Scene configuration file not found. here" + e.getMessage());
         }
@@ -92,7 +92,7 @@ public class MainWindowController implements Initializable {
     public void logOut(ActionEvent actionEvent) {
         Stage stage = (Stage) logOutButton.getScene().getWindow();
         try {
-            openButton(stage, Config.getPathToViews() + "sign-in-view.fxml");
+            loadScene(stage, Config.getPathToViews() + "sign-in-view.fxml");
         } catch (IOException e) {
             logger.error("Scene configuration file not found. " + e.getMessage());
         }
@@ -101,7 +101,7 @@ public class MainWindowController implements Initializable {
     public void openFriendList(ActionEvent actionEvent) {
         Stage stage = (Stage) friends.getScene().getWindow();
         try {
-            openButton(stage, Config.getPathToViews() + "friends-view.fxml");
+            loadScene(stage, Config.getPathToViews() + "friends-view.fxml");
         } catch (IOException e) {
             logger.error("Scene configuration file not found. here" + e.getMessage());
         }
