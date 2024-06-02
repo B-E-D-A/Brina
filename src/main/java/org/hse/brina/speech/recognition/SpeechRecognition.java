@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hse.brina.Config;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -24,7 +25,7 @@ public class SpeechRecognition {
 
     private static final Logger logger = LogManager.getLogger();
 
-    private SpeechSettings downloadSettings() throws IOException {
+    public SpeechSettings downloadSettings() throws IOException {
         Path credentialsFilePath = Paths.get(Config.getProjectPath() + "/src/main/resources/org/hse/brina/integrations/google-credentials.json");
         String credentialsJson = Files.readString(credentialsFilePath);
         if (credentialsJson.contains("[")) {
@@ -50,6 +51,10 @@ public class SpeechRecognition {
     }
 
     public String translateAudioToText(String path) {
+        File file = new File(path);
+        if (!file.exists()) {
+            return "Файл не существует";
+        }
         StringBuilder textResult = new StringBuilder();
         try {
             SpeechSettings settings = downloadSettings();

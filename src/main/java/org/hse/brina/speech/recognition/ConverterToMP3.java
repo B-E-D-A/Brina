@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 
 public class ConverterToMP3 {
     private static final Logger logger = LogManager.getLogger();
-    private boolean isFfmpegInstalled = false;
+    public boolean isFfmpegInstalled = false;
 
     public void installFFmpeg() {
         String[] command = {"wsl", "sudo", "apt-get", "update", "&&", "wsl", "sudo", "apt-get", "install", "-y", "ffmpeg"};
