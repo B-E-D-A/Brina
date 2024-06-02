@@ -575,7 +575,6 @@ public class RichTextDemo extends Application {
 
         Text accessText = new Text("Права доступа:");
         accessText.setStyle("-fx-font-size: 14px; -fx-font-family: \"Montserrat\"; -fx-text-fill: #434c55ff");
-        accessText.setFill(Color.BLACK);
         accessText.setTextAlignment(TextAlignment.CENTER);
         Button readerButton = new Button();
         readerButton.setText("Читатель");
@@ -636,7 +635,6 @@ public class RichTextDemo extends Application {
                 documentId.replace(0, documentId.length(), Integer.toString(ID));
                 Text shareText = new Text("У " + usersTextField.getText() + " теперь есть доступ по ключу:");
                 shareText.setStyle("-fx-font-size: 14px; -fx-font-family: \"Montserrat\"; -fx-text-fill: #434c55ff");
-                shareText.setFill(Color.BLACK);
                 shareText.setTextAlignment(TextAlignment.CENTER);
                 IDArea.setText(Integer.toString(Math.abs(ID)));
                 IDArea.setPrefColumnCount(1);

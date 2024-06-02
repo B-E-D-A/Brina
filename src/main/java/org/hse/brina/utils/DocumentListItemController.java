@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
- * Класс DocumentListItemController отвечает за управление пользовательским интерфейсом одного элемента списка документов
+ * Класс DocumentListItemController отвечает за управление пользовательским интерфейсом одного элемента списка документов.
  */
 
 public class DocumentListItemController implements Initializable {

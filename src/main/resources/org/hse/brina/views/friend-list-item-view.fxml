@@ -3,24 +3,25 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <HBox xmlns:fx="http://javafx.com/fxml/1" fx:id="globalHBox" alignment="CENTER" maxHeight="40.0"
       prefHeight="40.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-      fx:controller="org.hse.brina.utils.FriendListItemController">
-    <HBox fx:id="nameHBox" alignment="CENTER_LEFT" maxWidth="Infinity" prefHeight="55.0" prefWidth="550.0">
-        <Text fx:id="friendName" styleClass="simple-text" strokeType="OUTSIDE" strokeWidth="0.0" text="Имя друга">
+      fx:controller="org.hse.brina.utils.FriendListItemController" HBox.hgrow="ALWAYS">
+    <HBox fx:id="nameHBox" alignment="CENTER_LEFT" maxWidth="Infinity" prefHeight="55.0" HBox.hgrow="ALWAYS">
+        <Text fx:id="friendName" styleClass="simple-text" strokeType="OUTSIDE" strokeWidth="0.0" text="Имя друга"
+              HBox.hgrow="ALWAYS">
         </Text>
     </HBox>
     <Separator fx:id="sep1" orientation="VERTICAL" prefHeight="55.0" prefWidth="5.0"/>
-    <HBox alignment="CENTER" prefWidth="60">
+    <HBox alignment="CENTER" prefWidth="70">
         <CheckBox fx:id="readerAccessCheckBox"/>
         <padding>
             <Insets bottom="10" top="10" right="10" left="10"/>
         </padding>
     </HBox>
     <Separator fx:id="sep2" orientation="VERTICAL" prefHeight="55.0" prefWidth="5.0"/>
-    <HBox alignment="CENTER" prefWidth="60">
+    <HBox alignment="CENTER" prefWidth="70">
         <CheckBox fx:id="writerAccessCheckBox"/>
         <padding>
             <Insets bottom="10" top="10" right="10" left="10"/>

@@ -9,13 +9,11 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Config предоставляет значения ширины и высоты по умолчанию для приложения, сохраняет путь до базы данных у пользователя
+ * Config предоставляет значения ширины и высоты по умолчанию для приложения, сохраняет путь до базы данных у пользователя.
  */
 public class Config {
     private static final Properties properties = new Properties();
     private static final Logger logger = LogManager.getLogger();
-
-    public static Client client = new Client("localhost", 8080);
     private static final String projectPath = "projectPath";
     private static final String pathToDB = "pathToDB";
     private static final String defaultHeight = "defaultHeight";
@@ -24,6 +22,7 @@ public class Config {
     private static final String pathToAssets = "/org/hse/brina/assets/";
     private static final String pathToCss = "/org/hse/brina/css/";
     private static final int appNameLength = 5;
+    public static Client client = new Client("localhost", 8080);
     public static StringBuilder oldScene = new StringBuilder();
 
 

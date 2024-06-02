@@ -1,9 +1,5 @@
 package org.hse.brina.utils;
 
-/**
- * Класс FriendListItemController управляет отображением и настройкой элементов списка друзей.
- */
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
@@ -13,10 +9,13 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hse.brina.Config;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+/**
+ * Класс FriendListItemController управляет отображением и настройкой элементов списка друзей.
+ */
 
 public class FriendListItemController implements Initializable {
     private static final Logger logger = LogManager.getLogger();

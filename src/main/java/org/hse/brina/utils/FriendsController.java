@@ -9,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -60,6 +61,10 @@ public class FriendsController implements Initializable {
     public HBox headingHBox;
     @FXML
     public HBox buttonsHBox;
+    @FXML
+    public HBox readerHeading;
+    @FXML
+    public HBox writerHeading;
     TextField infoTextField = new TextField();
 
     public void backButtonClicked(ActionEvent actionEvent) {
@@ -86,6 +91,7 @@ public class FriendsController implements Initializable {
         VBox.setVgrow(friendList, Priority.ALWAYS);
         VBox.setVgrow(globalVBox, Priority.ALWAYS);
         HBox.setHgrow(gHBox, Priority.ALWAYS);
+        HBox.setHgrow(headingHBox, Priority.ALWAYS);
         boolean isCheckBoxNeeded = !Config.oldScene.toString().equals(Config.getPathToViews() + "main-window-view.fxml");
         if (isCheckBoxNeeded) {
             noFriendsWarning.setText("Выберите друзей для совместной работы");
@@ -111,9 +117,14 @@ public class FriendsController implements Initializable {
             vbox.setPadding(new Insets(10, 10, 0, 0));
 
             HBox newHBox = new HBox(buttonsHBox, vbox);
+            newHBox.setPadding(new Insets(0, 0, 7, 0));
             labelsHBox.getChildren().remove(buttonsHBox);
             globalVBox.getChildren().add(0, newHBox);
-            headingHBox.setPrefWidth(430);
+            Separator separator = new Separator();
+            separator.setPrefWidth(200.0);
+            globalVBox.getChildren().add(1, separator);
+        } else {
+            labelsHBox.getChildren().removeAll(readerHeading, writerHeading);
         }
         friendNotFoundWarning.setText("Пользователь " + infoTextField.getText() + " не найден");
         friendNotFoundWarning.setVisible(false);

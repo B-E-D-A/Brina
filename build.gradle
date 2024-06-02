@@ -1,59 +1,60 @@
 plugins {
-  id 'java'
-  id 'application'
-  id 'org.javamodularity.moduleplugin' version '1.8.12'
-  id 'org.openjfx.javafxplugin' version '0.0.13'
-  id 'org.beryx.jlink' version '2.25.0'
+    id 'java'
+    id 'application'
+    id 'org.javamodularity.moduleplugin' version '1.8.12'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
+    id 'org.beryx.jlink' version '2.25.0'
 }
 
 group 'org.demo'
 version '1.0-SNAPSHOT'
 
 repositories {
-  mavenCentral()
+    mavenCentral()
 }
 
 ext {
-  junitVersion = '5.10.0'
+    junitVersion = '5.10.0'
 }
 
 tasks.withType(JavaCompile).configureEach {
-  options.encoding = 'UTF-8'
+    options.encoding = 'UTF-8'
 }
 
 application {
-  mainModule = 'org.hse.texteditorwithai'
-  mainClass = 'org.hse.texteditorwithai.HelloApplication'
+    mainModule = 'org.hse.texteditorwithai'
+    mainClass = 'org.hse.texteditorwithai.HelloApplication'
 }
 
 javafx {
-  version = '17.0.6'
-  modules = ['javafx.controls', 'javafx.fxml']
+    version = '17.0.6'
+    modules = ['javafx.controls', 'javafx.fxml']
 }
 
 dependencies {
-  implementation('org.controlsfx:controlsfx:11.1.2')
-  implementation('com.dlsc.formsfx:formsfx-core:11.6.0') {
-    exclude(group: 'org.openjfx')
-  }
-  implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
-  implementation( 'org.fxmisc.richtext:richtextfx:0.11.0')
-  implementation('org.xerial:sqlite-jdbc:3.32.3.3')
-  implementation ('org.apache.logging.log4j:log4j-core:2.23.1')
-  implementation ('org.apache.logging.log4j:log4j-api:2.23.1')
-  implementation("org.jetbrains:annotations:16.0.2")
-  implementation ("org.python:jython-slim:2.7.3")
-  implementation 'com.googlecode.soundlibs:mp3spi:1.9.5.4'
-  implementation 'com.googlecode.soundlibs:tritonus-share:0.3.7.4'
-  implementation 'com.google.auth:google-auth-library-oauth2-http:0.20.0'
-  implementation 'io.github.cdimascio:java-dotenv:5.1.2'
-  implementation platform('com.google.cloud:libraries-bom:26.38.0')
-  implementation 'com.google.cloud:google-cloud-speech'
+    implementation('org.controlsfx:controlsfx:11.1.2')
+    implementation('com.dlsc.formsfx:formsfx-core:11.6.0') {
+        exclude(group: 'org.openjfx')
+    }
+    implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
+    implementation('org.fxmisc.richtext:richtextfx:0.11.0')
+    implementation('org.xerial:sqlite-jdbc:3.32.3.3')
+    implementation('org.apache.logging.log4j:log4j-core:2.23.1')
+    implementation('org.apache.logging.log4j:log4j-api:2.23.1')
+    implementation("org.jetbrains:annotations:16.0.2")
+    implementation("org.python:jython-slim:2.7.3")
+    implementation 'com.googlecode.soundlibs:mp3spi:1.9.5.4'
+    implementation 'com.googlecode.soundlibs:tritonus-share:0.3.7.4'
+    implementation 'com.google.auth:google-auth-library-oauth2-http:0.20.0'
+    implementation 'io.github.cdimascio:java-dotenv:5.1.2'
+    implementation platform('com.google.cloud:libraries-bom:26.38.0')
+    implementation 'com.google.cloud:google-cloud-speech'
+    implementation("net.bramp.ffmpeg:ffmpeg:0.8.0")
 
-  testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
 
 test {
-  useJUnitPlatform()
+    useJUnitPlatform()
 }

@@ -7,12 +7,15 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Main является точкой входа в приложение и запускает его,
@@ -20,7 +23,6 @@ import java.io.InputStream;
  * создает сцену и запускает основное окно приложения.
  */
 public class Main extends Application {
-
     private static final Logger logger = LogManager.getLogger();
 
     public static void main(String[] args) {
@@ -61,6 +63,16 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.centerOnScreen();
+        stage.setOnCloseRequest(event -> deleteFilesOnExit());
         stage.show();
+    }
+
+    private void deleteFilesOnExit() {
+        Path file = Paths.get(Config.getProjectPath() + "\\result.mp3");
+        try {
+            FileUtils.forceDelete(file.toFile());
+        } catch (IOException e) {
+            logger.info("Failed to delete file: " + file + " " + e.getMessage());
+        }
     }
 }

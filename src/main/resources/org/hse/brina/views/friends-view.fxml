@@ -20,12 +20,12 @@
             </HBox>
             <HBox fx:id="headingHBox" alignment="CENTER" maxWidth="Infinity" prefWidth="350">
                 <Text fx:id="heading" styleClass="simple-text" text="Мои друзья"
-                      textAlignment="CENTER"/>
+                      textAlignment="CENTER" HBox.hgrow="ALWAYS"/>
             </HBox>
-            <HBox alignment="CENTER" prefWidth="60" prefHeight="35" maxWidth="Infinity">
+            <HBox fx:id="readerHeading" alignment="CENTER" prefWidth="60" prefHeight="35" maxWidth="Infinity">
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="simple-text" text="Читатель"/>
             </HBox>
-            <HBox alignment="CENTER" prefWidth="60" prefHeight="35" maxWidth="Infinity">
+            <HBox fx:id="writerHeading" alignment="CENTER" prefWidth="60" prefHeight="35" maxWidth="Infinity">
                 <Text strokeType="OUTSIDE" strokeWidth="0.0"
                       styleClass="simple-text" text="Редактор"
                       textAlignment="RIGHT"/>

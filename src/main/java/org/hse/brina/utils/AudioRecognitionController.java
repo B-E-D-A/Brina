@@ -12,7 +12,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hse.brina.Config;
 import org.hse.brina.richtext.RichTextDemo;
+import org.hse.brina.speech.recognition.AudioRecorder;
+import org.hse.brina.speech.recognition.ConverterToMP3;
 import org.hse.brina.speech.recognition.SpeechRecognition;
 
 import java.io.File;
@@ -24,6 +27,7 @@ import java.io.File;
 
 public class AudioRecognitionController {
     private static final Logger logger = LogManager.getLogger();
+    private final AudioRecorder recorder = new AudioRecorder();
     @FXML
     public Button loadAudio;
     @FXML
@@ -56,6 +60,7 @@ public class AudioRecognitionController {
         audioName.setVisible(false);
     }
 
+    @FXML
     public void loadAudio(ActionEvent actionEvent) {
         String initialDir = System.getProperty("user.dir");
         FileChooser fileChooser = new FileChooser();
@@ -74,7 +79,11 @@ public class AudioRecognitionController {
         }
     }
 
+    @FXML
     public void recognizeSpeech(ActionEvent actionEvent) throws Exception {
+        ConverterToMP3 converter = new ConverterToMP3();
+        converter.convertWAVToMP3();
+        path.replace(0, path.length(), Config.getProjectPath() + "\\result.mp3");
         SpeechRecognition recognizer = new SpeechRecognition();
         if (!path.isEmpty()) {
             String content = recognizer.translateAudioToText(path.toString());
@@ -82,6 +91,7 @@ public class AudioRecognitionController {
         }
     }
 
+    @FXML
     public void pasteResult(ActionEvent actionEvent) {
         try {
             documentArea.insertText(documentArea.getCaretPosition(), resultArea.getText());
@@ -92,7 +102,16 @@ public class AudioRecognitionController {
         }
     }
 
+    @FXML
     public void recordAudio(ActionEvent actionEvent) {
+        if (recordAudioButton.getText().equals("Записать")) {
+            recorder.startRecording();
+            recordAudioButton.setText("Остановить запись");
+        } else if (recordAudioButton.getText().equals("Остановить запись")) {
+            recorder.stopRecording();
+            recordAudioButton.setText("Записать");
+            path.replace(0, path.length(), Config.getProjectPath() + "\\record.wav");
+        }
     }
 
 }
