@@ -3,7 +3,6 @@ package org.hse.brina.server;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hse.brina.Config;
-import org.python.antlr.ast.Str;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,8 +20,9 @@ import java.util.*;
 
 public class Server {
     private static final Logger logger = LogManager.getLogger();
-    private ServerSocket serverSocket;
-    private Connection connection;
+    public ServerSocket serverSocket;
+    public Connection connection;
+    public boolean isRunning;
 
     public Server(int port) {
         try {
@@ -35,14 +35,26 @@ public class Server {
         }
     }
 
+    public boolean isRunning() {
+        return isRunning;
+    }
+
+    public ServerSocket getServerSocket() {
+        return serverSocket;
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
     public static void main(String[] args) {
         Server server = new Server(8080);
-
         server.start();
     }
 
     public void start() {
         try {
+            isRunning = true;
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 logger.info("Client connected: " + clientSocket.getInetAddress().getHostName());
@@ -55,10 +67,10 @@ public class Server {
         }
     }
 
-    class ClientHandler implements Runnable {
+    public class ClientHandler implements Runnable {
         private Socket clientSocket;
         private BufferedReader in;
-        private PrintWriter out;
+        public PrintWriter out;
 
         public ClientHandler(Socket socket) {
             this.clientSocket = socket;
@@ -129,7 +141,6 @@ public class Server {
                         out.println("Wrong password");
                     }
                 }
-
             } else {
                 out.println("Invalid command format");
             }
@@ -320,7 +331,7 @@ public class Server {
             }
         }
 
-        void addUser(String username, String password, String passwordSalt) {
+        public void addUser(String username, String password, String passwordSalt) {
             String sql = "INSERT INTO users (username, password, password_salt) VALUES (?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, username);
@@ -391,7 +402,7 @@ public class Server {
             return "No such file";
         }
 
-        boolean checkPassword(String username, String password) {
+        public boolean checkPassword(String username, String password) {
             String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, username);
@@ -404,7 +415,7 @@ public class Server {
             }
         }
 
-        private boolean checkIsUserRegistered(String username) {
+        public boolean checkIsUserRegistered(String username) {
             String sql = "SELECT * FROM users WHERE username = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, username);
@@ -418,7 +429,7 @@ public class Server {
             return true;
         }
 
-        private Map<String, String> getUserDocuments(String username) {
+        public Map<String, String> getUserDocuments(String username) {
             Map<String, String> documentsMap = new HashMap<>();
             String sql = "SELECT filename, file_path, access FROM user_documents WHERE username = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -467,7 +478,6 @@ public class Server {
             return -1;
         }
 
-
         public void stop() {
             try {
                 in.close();
@@ -478,6 +488,24 @@ public class Server {
             } catch (IOException e) {
                 logger.error(e.getMessage());
             }
+        }
+    }
+
+    public void stop() {
+        isRunning = false;
+        try {
+            if (serverSocket != null && !serverSocket.isClosed()) {
+                serverSocket.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

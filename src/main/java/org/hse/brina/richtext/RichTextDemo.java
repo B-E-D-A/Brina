@@ -391,8 +391,11 @@ public class RichTextDemo extends Application {
         thirdOption.setOnAction(e -> {
             showResponse("Сделай текст более кратким");
         });
-        MenuItem fourthOption = new MenuItem("Translate text into...");
-        contextMenu.getItems().addAll(firstOption, secondOption, thirdOption);
+        MenuItem fourthOption = new MenuItem("Перевести на английский");
+        fourthOption.setOnAction(e -> {
+            showResponse("Переведи текст на английский язык");
+        });
+        contextMenu.getItems().addAll(firstOption, secondOption, thirdOption, fourthOption);
         area.setOnContextMenuRequested(e -> {
             contextMenu.show(area, e.getScreenX(), e.getScreenY());
         });
