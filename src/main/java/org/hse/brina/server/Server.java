@@ -3,7 +3,6 @@ package org.hse.brina.server;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hse.brina.Config;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -68,7 +67,7 @@ public class Server {
     }
 
     public class ClientHandler implements Runnable {
-        private Socket clientSocket;
+        private final Socket clientSocket;
         private BufferedReader in;
         public PrintWriter out;
 
@@ -216,13 +215,14 @@ public class Server {
             }
         }
 
-        private void performAddDocumentById(String inputLine) {
+        public void performAddDocumentById(String inputLine) {
             String[] userData = inputLine.split(" ");
             if (userData.length == 4) {
                 String username = userData[1];
                 String filename = userData[2];
                 String access = userData[3];
                 saveDocumentById(username, filename, access);
+                out.println("Document saved");
             } else {
                 out.println("Invalid command format");
             }
@@ -233,6 +233,7 @@ public class Server {
             if (userData.length == 2) {
                 int documentId = userData[1].hashCode();
                 setLockStatus(documentId, 0);
+                out.println("Document unlocked");
             } else {
                 out.println("Invalid command format");
             }
@@ -299,7 +300,7 @@ public class Server {
             }
         }
 
-        private String getFriendsList(String username) {
+        public String getFriendsList(String username) {
             StringBuilder friends = new StringBuilder();
             String sql = "SELECT friend FROM friends WHERE username = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -319,8 +320,7 @@ public class Server {
             return friends.toString();
         }
 
-
-        private void addFriend(String username, String friendName) {
+        public void addFriend(String username, String friendName) {
             String sql = "INSERT INTO friends (username, friend) VALUES (?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, username);
@@ -344,7 +344,7 @@ public class Server {
             }
         }
 
-        private void addDocument(String filename, String username, String name, int m_lock) {
+        public void addDocument(String filename, String username, String name, int m_lock) {
             String sql = "INSERT INTO user_documents (username, filename, file_path, file_id, access, lock) VALUES (?, ?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, username);
@@ -360,7 +360,7 @@ public class Server {
             }
         }
 
-        private void saveDocumentById(String username, String filename, String access) {
+        public void saveDocumentById(String username, String filename, String access) {
             String sql = "INSERT INTO user_documents (username, filename, file_path, file_id, access, lock) VALUES (?, ?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, username);
@@ -448,7 +448,7 @@ public class Server {
             return documentsMap;
         }
 
-        private void setLockStatus(Integer id, Integer value) {
+        public void setLockStatus(Integer id, Integer value) {
             String sql = "UPDATE user_documents SET lock = 1 WHERE file_id = ?";
             try (PreparedStatement updateStatement = connection.prepareStatement(sql)) {
                 updateStatement.setInt(1, id);
@@ -463,7 +463,7 @@ public class Server {
             }
         }
 
-        private int getLockStatus(Integer id) {
+        public int getLockStatus(Integer id) {
             String sql = "SELECT lock FROM user_documents WHERE file_id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, id);
