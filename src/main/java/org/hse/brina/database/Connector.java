@@ -25,26 +25,12 @@ public class Connector {
 
             logger.info("Connection to SQLite has been established.");
 
-            String sql = "CREATE TABLE IF NOT EXISTS users (" +
-                    "username TEXT NOT NULL," +
-                    "password TEXT NOT NULL," +
-                    "password_salt TEXT NOT NULL" +
-                    ")";
+            String sql = "CREATE TABLE IF NOT EXISTS users (" + "username TEXT NOT NULL," + "password TEXT NOT NULL," + "password_salt TEXT NOT NULL" + ")";
             Statement statement = connector.createStatement();
             statement.executeUpdate(sql);
-            sql = "CREATE TABLE IF NOT EXISTS user_documents (" +
-                    "username TEXT NOT NULL," +
-                    "filename TEXT NOT NULL," +
-                    "file_path TEXT NOT NULL," +
-                    "file_id INTEGER," +
-                    "access TEXT NOT NULL," +
-                    "lock INTEGER" +
-                    ")";
+            sql = "CREATE TABLE IF NOT EXISTS user_documents (" + "username TEXT NOT NULL," + "filename TEXT NOT NULL," + "file_path TEXT NOT NULL," + "file_id INTEGER," + "access TEXT NOT NULL," + "lock INTEGER" + ")";
             statement.executeUpdate(sql);
-            sql = "CREATE TABLE IF NOT EXISTS friends (" +
-                    "username TEXT NOT NULL," +
-                    "friend TEXT NOT NULL" +
-                    ")";
+            sql = "CREATE TABLE IF NOT EXISTS friends (" + "username TEXT NOT NULL," + "friend TEXT NOT NULL" + ")";
             statement.executeUpdate(sql);
             logger.info("Tables has been created");
         } catch (SQLException e) {

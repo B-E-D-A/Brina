@@ -75,6 +75,13 @@ public class SignInController {
         }
     }
 
+    public static void loadScene(Stage stage, String fxmlView, double width, double height) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlView));
+        Parent logInLoader = loader.load();
+        Scene scene = new Scene(logInLoader, width, height);
+        stage.setScene(scene);
+    }
+
     @FXML
     protected void initialize() {
 
@@ -86,13 +93,6 @@ public class SignInController {
         invalidLoginField.setOnMouseClicked(event -> hideWarningAboutEmptyField(invalidLoginField));
         invalidPasswordField.setOnMouseClicked(event -> hideWarningAboutEmptyField(invalidPasswordField));
 
-    }
-
-    protected void loadScene(Stage stage, String fxmlView) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlView));
-        Parent logInLoader = loader.load();
-        Scene scene = new Scene(logInLoader, Config.getDefaultWidth(), Config.getDefaultHeight());
-        stage.setScene(scene);
     }
 
     protected boolean checkIfFieldsAreEmpty() {
@@ -150,7 +150,7 @@ public class SignInController {
     private void signUpFromInButtonClicked() {
         Stage stage = (Stage) signUpButton.getScene().getWindow();
         try {
-            loadScene(stage, Config.getPathToViews() + "sign-up-view.fxml");
+            loadScene(stage, Config.getPathToViews() + "sign-up-view.fxml", Config.getDefaultWidth(), Config.getDefaultHeight());
         } catch (IOException e) {
             logger.error("Scene configuration file not found. " + e.getMessage());
         }
@@ -158,7 +158,7 @@ public class SignInController {
 
     private void enter(Stage stage) {
         try {
-            loadScene(stage, Config.getPathToViews() + "main-window-view.fxml");
+            loadScene(stage, Config.getPathToViews() + "main-window-view.fxml", Config.getDefaultWidth(), Config.getDefaultHeight());
         } catch (IOException e) {
             logger.error("Scene configuration file not found. " + e.getMessage());
         }
@@ -193,5 +193,4 @@ public class SignInController {
             }
         });
     }
-
 }

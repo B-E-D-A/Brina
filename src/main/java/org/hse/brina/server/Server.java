@@ -3,6 +3,7 @@ package org.hse.brina.server;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hse.brina.Config;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +11,8 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Класс Server - сервер, который прослушивает подключения клиентов и обрабатывает их запросы,
@@ -34,6 +36,11 @@ public class Server {
         }
     }
 
+    public static void main(String[] args) {
+        Server server = new Server(8080);
+        server.start();
+    }
+
     public boolean isRunning() {
         return isRunning;
     }
@@ -44,11 +51,6 @@ public class Server {
 
     public Connection getConnection() {
         return connection;
-    }
-
-    public static void main(String[] args) {
-        Server server = new Server(8080);
-        server.start();
     }
 
     public void start() {
@@ -66,10 +68,28 @@ public class Server {
         }
     }
 
+    public void stop() {
+        isRunning = false;
+        try {
+            if (serverSocket != null && !serverSocket.isClosed()) {
+                serverSocket.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public class ClientHandler implements Runnable {
         private final Socket clientSocket;
-        private BufferedReader in;
         public PrintWriter out;
+        private BufferedReader in;
 
         public ClientHandler(Socket socket) {
             this.clientSocket = socket;
@@ -381,8 +401,7 @@ public class Server {
             String selectQuery = "SELECT file_path, access FROM user_documents WHERE username = ? AND file_id = ?";
             String updateQuery = "UPDATE user_documents SET lock = 1 WHERE username = ? AND file_id = ?";
 
-            try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery);
-                 PreparedStatement updateStatement = connection.prepareStatement(updateQuery)) {
+            try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery); PreparedStatement updateStatement = connection.prepareStatement(updateQuery)) {
                 selectStatement.setString(1, username);
                 selectStatement.setInt(2, fileId);
                 ResultSet resultSet = selectStatement.executeQuery();
@@ -488,24 +507,6 @@ public class Server {
             } catch (IOException e) {
                 logger.error(e.getMessage());
             }
-        }
-    }
-
-    public void stop() {
-        isRunning = false;
-        try {
-            if (serverSocket != null && !serverSocket.isClosed()) {
-                serverSocket.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 }

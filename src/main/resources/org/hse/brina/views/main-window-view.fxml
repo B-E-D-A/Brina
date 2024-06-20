@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <StackPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
-           style="-fx-background-color: white;"
+           style="-fx-background-color: #fffcf7ff;"
            stylesheets="@../css/main-page-style.css"
            fx:controller="org.hse.brina.utils.MainWindowController">
     <HBox fx:id="imageHBox" styleClass="hbox"/>

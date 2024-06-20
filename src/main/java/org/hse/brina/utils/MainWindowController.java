@@ -51,7 +51,6 @@ public class MainWindowController implements Initializable {
         } else {
             scene = new Scene(sceneLoader, Config.getDefaultWidth(), Config.getDefaultHeight());
         }
-
         stage.setScene(scene);
     }
 

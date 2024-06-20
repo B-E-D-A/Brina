@@ -6,6 +6,11 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
+/**
+ * Класс SpeechRecognitionTest - unit тесты, проверяющие работу методов класса SpeechRecognition на корректность
+ */
+
+
 class SpeechRecognitionTest {
 
     private SpeechRecognition speechRecognizer;

@@ -6,15 +6,18 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Класс AudioRecorderTest - unit тесты, проверяющие работу методов класса AudioRecorder на корректность
+ */
+
 class AudioRecorderTest {
 
-    private AudioRecorder audioRecorder;
     private static final Logger logger = LogManager.getLogger();
+    private AudioRecorder audioRecorder;
 
     @BeforeEach
     void setUp() {

@@ -52,6 +52,7 @@ dependencies {
     implementation("net.bramp.ffmpeg:ffmpeg:0.8.0")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.0.0'
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
 

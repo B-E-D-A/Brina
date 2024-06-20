@@ -6,13 +6,13 @@
 ### Возможности пользователя:
 
 - Базовый набор функций редактора документов
-- Распознавать текст из аудио-записей mp3
-- Записывать текст голосом
-- Использовать чат gpt
-- Давать права доступа(чтение/редактирование) для определенных людей
+- Распознавание текста из аудио-записей mp3
+- Запись текста голосом
+- Использование чата GPT
+- Предоставление прав доступа(чтение/редактирование) для определенных людей
 - Сохранение документов в разных форматах (pdf, txt, docx)
 
-### Инструкция по установке приложения
+### Инструкция по установке приложения - Intellij IDEA
 
 - скачайте javafx 17.0.10 -  https://gluonhq.com/products/javafx/, распакуйте zip
 
@@ -22,10 +22,10 @@
 
 - Edit Configurations - Add new configuration - Application:
 
-Name = `Main`,
-module not specified = `19`,
--cp \<no module\> = `Text-Editor-with-AI.main`, 
-Main Class = `org.hse.brina.Main`
+`Name = Main`,
+`module not specified = 19`,
+`-cp \<no module\> = Text-Editor-with-AI.main`, 
+`Main Class = org.hse.brina.Main`
 
 Modify options —> Add VM options: `--module-path "path\openjfx-17.0.10_windows-x64_bin-sdk\javafx-sdk-17.0.10\lib" --add-modules javafx.controls,javafx.fxml` , где в кавычках надо указать путь к папке lib у скачанной библиотеки javafx
 
@@ -39,7 +39,7 @@ Modify options —> Add VM options: `--module-path "path\openjfx-17.0.10_windows
   - API key для чата YandexGPT
 
 
-- запускаем `Server.java`, далее `Main.java` (Main, который настоили)
+- запускаем `Connector.java`, после того, как он отработает: `Server.java`, далее `Main.java` (Main, который настоили)
 
 ### Текущий вид приложения
 
@@ -48,9 +48,3 @@ Modify options —> Add VM options: `--module-path "path\openjfx-17.0.10_windows
 | <img src="https://github.com/B-E-D-A/Text-Editor-with-AI/assets/112130616/cf516f22-2380-4fa0-a820-64e6cd8436b6" alt="sign-in" width="447" height="319"> | <img src="https://github.com/B-E-D-A/Text-Editor-with-AI/assets/112130616/9c08785a-ee25-4cfd-9d7a-912c0035ba38" alt="sign-up" width="447" height="319"> |
 | <img src="https://github.com/B-E-D-A/Brina/assets/112130616/20e3bca7-df05-4a18-99da-c8084cd39b63" alt="main-window" width="447" height="319"> | <img src="https://github.com/B-E-D-A/Brina/assets/112130616/2ac05c89-b82c-457a-abb2-976cba79266b" alt="editor" width="447" height="319"> |
 | <img src="https://github.com/B-E-D-A/Brina/assets/112130616/e5c83c54-df33-45d8-9eec-db1d37ee05a5" alt="main-window" width="447" height="465"> | <img src="https://github.com/B-E-D-A/Brina/assets/112130616/f4cedf9c-457b-4875-b5a0-924faba15ae5" alt="editor" width="447" height="300"> |
-
-Палитра:
-
-&nbsp; &nbsp; &nbsp; ![#101d2f](https://placehold.co/15x15/101d2f/101d2f.png) &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; ![#194f93](https://placehold.co/15x15/194f93/194f93.png)  &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; ![#3d6dac](https://placehold.co/15x15/3d6dac/3d6dac.png) &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;![#80aad7](https://placehold.co/15x15/80aad7/80aad7.png) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;![#f6ecde](https://placehold.co/15x15/f6ecde/f6ecde.png) &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; ![#e0850c](https://placehold.co/15x15/e0850c/e0850c.png)
-
-`#101d2f` `#194f93` `#3d6dac` `#80aad7` `#f6ecde` `#e0850c`

@@ -48,18 +48,14 @@ public class CollaborationController {
 
 
     private void loadScene(Stage stage, String fxmlView) throws IOException {
-        if(fxmlView.equals(Config.getPathToViews()+"friends-view.fxml")){
-            logger.info("FROM COLLAB PAGE");
-            Config.oldScene.replace(0, Config.oldScene.length(),Config.getPathToViews()+"collaboration-view.fxml");
+        if (fxmlView.equals(Config.getPathToViews() + "friends-view.fxml")) {
+            Config.oldScene.replace(0, Config.oldScene.length(), Config.getPathToViews() + "collaboration-view.fxml");
         }
         FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlView));
-        logger.info("LOAD: " + fxmlView);
         Parent logInLoader = loader.load();
         Scene scene = new Scene(logInLoader, stage.getScene().getWidth(), stage.getScene().getHeight());
-        logger.info("SCENE CREATED");
         stage.setScene(scene);
     }
-
 
     @FXML
     private void openEnterButton() {

@@ -32,7 +32,7 @@ public class SignUpController extends SignInController {
     private void backButtonClicked() {
         Stage stage = (Stage) backButton.getScene().getWindow();
         try {
-            loadScene(stage, Config.getPathToViews() + "sign-in-view.fxml");
+            loadScene(stage, Config.getPathToViews() + "sign-in-view.fxml", Config.getDefaultWidth(), Config.getDefaultHeight());
         } catch (IOException e) {
             logger.error("Scene configuration file not found. " + e.getMessage());
         }
@@ -41,7 +41,8 @@ public class SignUpController extends SignInController {
     @FXML
     private void signUpButtonClicked() {
         Stage stage = (Stage) signUpButton.getScene().getWindow();
-        boolean isValid = checkIfFieldsAreEmpty();
+        boolean isValid;
+        checkIfFieldsAreEmpty();
         String username = loginField.getText();
         String password = passwordField.getText();
         String pattern = "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9@#$%]).{8,40}";
@@ -64,16 +65,17 @@ public class SignUpController extends SignInController {
             passwordRulesVBox.getChildren().removeAll();
             setEyeButtonAction();
         }
-        if (isValid) {
+        if (isValid && checkIfFieldsAreEmpty()) {
             Config.client.setName(username);
             Config.client.sendMessage("signUpUser " + username + " " + getHash(password + password.hashCode()) + " " + password.hashCode());
             String response = Config.client.receiveMessage();
             try {
                 if (response.equals("User with the same name already exists")) {
+                    loginField.setVisible(false);
                     invalidLoginField.setText("Пользователь с таким именем уже существует");
                     invalidLoginField.setVisible(true);
                 } else if (response.equals("User is registered")) {
-                    loadScene(stage, Config.getPathToViews() + "successful-sign-up-view.fxml");
+                    loadScene(stage, Config.getPathToViews() + "successful-sign-up-view.fxml", Config.getDefaultWidth(), Config.getDefaultHeight());
                 }
             } catch (Exception e) {
                 logger.error("Scene configuration file not found. " + e.getMessage());

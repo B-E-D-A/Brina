@@ -9,6 +9,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Класс ConverterToMP3Test - unit тесты, проверяющие работу методов класса ConverterToMP3 на корректность
+ */
+
 class ConverterToMP3Test {
 
     private ConverterToMP3 converterToMP3;

@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
@@ -21,8 +20,8 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hse.brina.Config;
-import org.hse.brina.Main;
 import org.hse.brina.richtext.RichTextDemo;
+import org.hse.brina.signin.SignInController;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -70,17 +69,10 @@ public class FriendsController implements Initializable {
     public void backButtonClicked(ActionEvent actionEvent) {
         Stage stage = (Stage) backButton.getScene().getWindow();
         try {
-            loadScene(stage, Config.oldScene.toString());
+            SignInController.loadScene(stage, Config.oldScene.toString(), stage.getScene().getWidth(), stage.getScene().getHeight());
         } catch (IOException e) {
             logger.error("Scene configuration file not found. " + e.getMessage());
         }
-    }
-
-    private void loadScene(Stage stage, String fxmlView) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlView));
-        Parent logInLoader = loader.load();
-        Scene scene = new Scene(logInLoader, stage.getScene().getWidth(), stage.getScene().getHeight());
-        stage.setScene(scene);
     }
 
     @Override
